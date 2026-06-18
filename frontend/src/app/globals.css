@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import 'lenis/dist/lenis.css';
+
+/* PP Neue Montreal — same font as Motto */
+/* Option A: Fontshare (free) */
+@import url('https://api.fontshare.com/v2/css?f[]=neue-montreal@400,500,700&display=swap');
+
+:root {
+  --font-sans: 'Neue Montreal', 'Helvetica Neue', sans-serif;
+  --color-bg: #f0eeea;       /* Warm off-white like Motto */
+  --color-fg: #0a0a0a;       /* Near-black text */
+  --color-accent: #c8b89a;   /* Gold — nod to AKPsi */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+}
