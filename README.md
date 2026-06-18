@@ -1,27 +1,27 @@
-## AKPsi, Chi Gamma Chapter Website
+# AKPsi, Chi Gamma Chapter Website
 
 Tech Stack:
-# Frontend
+## Frontend
 * Next.js
 * React
 * Tailwind CSS
 * Hosted on Vercel
 
-# Backend / CMS
+## Backend / CMS
 * Django
 * Django REST Framework
 * Django Admin for content management
 
-# Database
+## Database
 * PostgreSQL
 * Hosted on Render
 
-# Media Storage
+## Media Storage
 * Cloudinary
 * Stores member photos, event galleries, and recruitment images 
 * CDN-delivered and automatically optimized
 
-Deployment Architecture
+## Deployment Architecture
 Vercel (Next.js Frontend)
             ↓
 Render (Django REST API + Admin)
