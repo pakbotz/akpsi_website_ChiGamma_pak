@@ -9,9 +9,9 @@
 
 ## Deployment Architecture
 Vercel (Next.js Frontend)
-            ↓
+↓
 Render (Django REST API + Admin)
-            ↓
+↓
 Render PostgreSQL
-            ↓
+↓
 Cloudinary (Images/CDN)
