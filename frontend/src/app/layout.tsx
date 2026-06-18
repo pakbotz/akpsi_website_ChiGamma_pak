@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ReactNode } from 'react';
 import Providers from '@/components/providers/Providers';
-//import Navbar from '@/components/layout/Navbar';
+import Navbar from '@/components/layout/Navbar';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -25,9 +25,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <Providers>
-          
+          <Navbar />
+            <main>{children}</main>
         </Providers>
       </body>
     </html>
-  );
+  )
 }
