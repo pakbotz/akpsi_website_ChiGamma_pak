@@ -3,12 +3,13 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import { CldImage } from 'next-cloudinary';
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-/**
+const SCROLL_IMAGE_PUBLIC_ID = 'IMG_6106_bokoyu'
+/**cd 
  * Signature scroll sequence, three phases inside one pinned section:
  *
  *  Phase A (0 -> 0.25 of scroll) — image grows from its entrance size up to
@@ -139,10 +140,17 @@ export default function ScrollImageReveal() {
           ref={imgRef}
           className="absolute left-1/2 top-1/2 z-20 aspect-video w-[58vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-sm bg-[#1c1c1c]"
         >
-          <div className="flex h-full w-full items-center justify-center">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
-              Placeholder Image
-            </span>
+          <div className="flex relative overflow-hidden h-full w-full items-center justify-center">
+            <CldImage
+                src={SCROLL_IMAGE_PUBLIC_ID}
+                alt="Chi Gamma brothers"
+                fill
+                sizes="78vw"
+                quality="auto"
+                format="auto"
+                className="object-cover"
+                preload
+              />
           </div>
         </div>
 
@@ -178,10 +186,16 @@ export default function ScrollImageReveal() {
             ref={shrinkTargetRef}
             className="aspect-video w-full shrink-0 rounded-sm bg-[#1c1c1c] sm:w-[14rem]"
           >
-            <div className="flex h-full w-full items-center justify-center">
-              <span className="text-[9px] uppercase tracking-[0.25em] text-white/20">
-                Placeholder
-              </span>
+            <div className="flex relative overflow-hidden h-full w-full items-center justify-center">
+              <CldImage
+                src={SCROLL_IMAGE_PUBLIC_ID}
+                alt="Chi Gamma brothers"
+                fill
+                sizes="78vw"
+                quality="auto"
+                format="auto"
+                className="object-cover"
+              />
             </div>
           </div>
 

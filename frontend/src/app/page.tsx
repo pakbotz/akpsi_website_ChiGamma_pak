@@ -1,4 +1,3 @@
-import HomeTopBar from '@/components/home/HomeTopBar';
 import Hero from '@/components/home/Hero';
 import ScrollImageReveal from '@/components/home/ScrollImageReveal';
 import PresidentMessage from '@/components/home/PresidentMessage';
@@ -9,7 +8,6 @@ import Footer from '@/components/home/Footer';
 export default function Home() {
   return (
     <div className="bg-[#0a0a0a] gap-24">
-      <HomeTopBar />
       <Hero />
       <ScrollImageReveal />
       <PresidentMessage />
