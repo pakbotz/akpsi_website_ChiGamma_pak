@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
       <footer className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto">
           {/* Top: flag/logo left, wordmark right */}
           <div className="flex items-start justify-between">
             <span className="text-sm tracking-wide text-white/50">

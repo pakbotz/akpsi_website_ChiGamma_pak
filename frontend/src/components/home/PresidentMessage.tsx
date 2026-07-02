@@ -16,7 +16,7 @@ export default function PresidentMessage() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
           {/* Left: image with hover reveal */}
           <div
-            className="group relative aspect-[4/5] w-full max-w-md cursor-pointer overflow-hidden bg-[#1c1c1c]"
+            className="group relative aspect-[4/5] w-full cursor-pointer overflow-hidden bg-[#1c1c1c]"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >

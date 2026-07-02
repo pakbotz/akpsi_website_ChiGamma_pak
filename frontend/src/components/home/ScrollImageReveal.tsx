@@ -154,37 +154,22 @@ export default function ScrollImageReveal() {
           </div>
         </div>
 
-        {/* Caption beneath the image, also absolute so it tracks with it during Phase A */}
-        <p
-          ref={captionRef}
-          className="absolute left-1/2 top-[78%] z-10 w-full max-w-md -translate-x-1/2 px-6 text-center text-sm leading-relaxed text-white/45"
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
       </div>
 
       {/* Headline + body copy, text wraps around the small image rather than
           having the image embedded inline inside the headline itself. */}
       <div
         ref={contentRef}
-        className="section-spacing relative z-10 mx-auto max-w-5xl px-6 opacity-0"
+        className="section-spacing relative z-10 mx-auto px-6 opacity-0"
       >
-        <h2
-          className="text-center font-medium leading-[0.95] tracking-tight text-[#f0eeea]"
-          style={{ fontSize: 'clamp(2.25rem, 6.5vw, 5.5rem)' }}
-        >
-          Shaping People,
-          <br />
-          Shaping Business
-        </h2>
+        
 
         {/* Small image sits beside the paragraph — this is the real DOM
             element the big image shrinks down and travels to land on. */}
-        <div className="mx-auto mt-12 flex max-w-3xl flex-col items-center gap-8 sm:flex-row sm:items-start">
+        <div className="mx-auto mt-12 flex flex-col items-center gap-8">
           <div
             ref={shrinkTargetRef}
-            className="aspect-video w-full shrink-0 rounded-sm bg-[#1c1c1c] sm:w-[14rem]"
+            className="aspect-video w-full max-w-3xl shrink-0 rounded-sm bg-[#1c1c1c] "
           >
             <div className="flex relative overflow-hidden h-full w-full items-center justify-center">
               <CldImage
@@ -198,7 +183,15 @@ export default function ScrollImageReveal() {
               />
             </div>
           </div>
-
+          
+        <h2
+          className="text-center font-medium leading-[0.95] tracking-tight text-[#f0eeea]"
+          style={{ fontSize: 'clamp(2.25rem, 6.5vw, 5.5rem)' }}
+        >
+          Shaping People,
+          <br />
+          Shaping Business
+        </h2>
           <p className="text-base leading-relaxed text-white/45">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi
