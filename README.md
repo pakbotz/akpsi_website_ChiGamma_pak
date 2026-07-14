@@ -2,16 +2,18 @@
 
 ## Tech Stack:
 * Frontend: Next.js, React, Tailwind CSS
-* Backend (Content management): Django (REST Framework, Admin)
-* Database: PostgreSQL
+* Backend (Content management): Admin Dashboard w/ Vercel + Supabase, NO backend server
+* Database: Supabase, PostgreSQL
 * Media Storage (Cloud): Cloudinary
-* Deployment: Vercel, Render
+* Deployment: Vercel
 
 ## Deployment Architecture
-Vercel (Next.js Frontend)
+Vercel (Next.js Website)  
 ↓
-Render (Django REST API + Admin)
-↓
-Render PostgreSQL
+Supabase SDK
+↓  
+Supabase Authentication (RLS), Supabase Database
 ↓
 Cloudinary (Images/CDN)
+
+Developed by Psi Tech
