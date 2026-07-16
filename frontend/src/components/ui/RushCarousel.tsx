@@ -5,13 +5,13 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const SLIDES = [
-  { caption: '(RUSH WEEK SOCIAL)' },
-  { caption: '(PROFESSIONAL WORKSHOP)' },
-  { caption: '(BIG / LITTLE REVEAL)' },
-  { caption: '(FORMAL INITIATION)' },
+  { caption: '(F26 INFO NIGHT)' },
+  { caption: '(SLUG TANK)' },
+  { caption: '(BEACH CLEANUP)' },
+  { caption: '(LINKEDIN ALUMNI WORKSHOP)' },
 ];
 
-export default function GalleryExplore() {
+export default function RushCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
