@@ -1,9 +1,9 @@
-import GalleryExplore from '@/components/ui/GalleryExplore';
+import RushCarousel from '@/components/ui/RushCarousel';
 
 export default function InterestedSection() {
   return (
-    <section className="bg-[#0a0a0a] py-28 sm:py-36">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
+      <div className="mx-auto max-w-8xl px-6">
         <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <h2
             className="font-medium tracking-tight text-[#f0eeea]"
@@ -12,12 +12,12 @@ export default function InterestedSection() {
             Interested in Joining?
           </h2>
           <p className="max-w-sm text-sm text-white/45">
-            A look at life in the chapter — from rush week to formal
-            initiation.
+            Become part of the world's largest and oldest business fraternity. 
+            Develop professionally, build lasting friendships, and create opportunities for your future.
           </p>
         </div>
 
-        <GalleryExplore />
+        <RushCarousel />
       </div>
     </section>
   );
