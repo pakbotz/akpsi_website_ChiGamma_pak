@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { CldImage } from 'next-cloudinary';
 
-export default function PresidentMessage() {
+export default function PresidentMessage({ photoPublicId }: { photoPublicId: string | null }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -14,19 +15,21 @@ export default function PresidentMessage() {
         </p>
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
-          {/* Left: image with hover reveal */}
           <div
             className="group relative aspect-[4/5] w-full cursor-pointer overflow-hidden bg-[#1c1c1c]"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <div className="flex h-full w-full items-center justify-center">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
-                Placeholder Photo
-              </span>
-            </div>
+            {photoPublicId ? (
+              <CldImage src={photoPublicId} alt="Chapter President" fill className="object-cover" />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
+                  Placeholder Photo
+                </span>
+              </div>
+            )}
 
-            {/* Dark overlay + button on hover */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: hovered ? 1 : 0 }}
@@ -44,7 +47,6 @@ export default function PresidentMessage() {
             </motion.div>
           </div>
 
-          {/* Right: text */}
           <div className="flex flex-col justify-center">
             <h2
               className="mb-6 font-medium leading-[1.05] tracking-tight text-[#f0eeea]"

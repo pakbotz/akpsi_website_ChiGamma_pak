@@ -3,15 +3,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { CldImage } from 'next-cloudinary';
 
-const SLIDES = [
-  { caption: '(F26 INFO NIGHT)' },
-  { caption: '(SLUG TANK)' },
-  { caption: '(BEACH CLEANUP)' },
-  { caption: '(LINKEDIN ALUMNI WORKSHOP)' },
-];
+type Slide = { cloudinary_public_id: string | null; caption: string };
 
-export default function RushCarousel() {
+export default function RushCarousel({ slides }: { slides: Slide[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
@@ -42,27 +38,33 @@ export default function RushCarousel() {
     <div className="relative">
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex gap-4 sm:gap-6">
-          {SLIDES.map((slide, i) => (
-            <div
-              key={i}
-              className="min-w-0 shrink-0 basis-[78%] sm:basis-[42%] lg:basis-[28%]"
-            >
-              <div className="aspect-[4/5] w-full bg-[#1c1c1c]">
-                <div className="flex h-full w-full items-center justify-center">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
-                    Placeholder Image
-                  </span>
-                </div>
+          {slides.map((slide, i) => (
+            <div key={i} className="min-w-0 shrink-0 basis-[78%] sm:basis-[42%] lg:basis-[28%]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#1c1c1c]">
+                {slide.cloudinary_public_id ? (
+                  <CldImage
+                    src={slide.cloudinary_public_id}
+                    alt={slide.caption}
+                    fill
+                    aspectRatio="4:5"
+                    crop="fill"
+                    gravity="auto"
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center">
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
+                      Placeholder Image
+                    </span>
+                  </div>
+                )}
               </div>
-              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">
-                {slide.caption}
-              </p>
+              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">{slide.caption}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Prev / next controls */}
       <div className="mt-10 flex items-center gap-4">
         <button
           onClick={scrollPrev}
