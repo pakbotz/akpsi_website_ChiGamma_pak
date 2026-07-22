@@ -21,7 +21,15 @@ export default function PresidentMessage({ photoPublicId }: { photoPublicId: str
             onMouseLeave={() => setHovered(false)}
           >
             {photoPublicId ? (
-              <CldImage src={photoPublicId} alt="Chapter President" fill className="object-cover" />
+              <CldImage 
+                src={photoPublicId} 
+                alt="Chapter President" 
+                fill 
+                aspectRatio="4:5"
+                crop="fill"
+                gravity="auto"
+                className="object-cover" 
+              />
             ) : (
               <div className="flex h-full w-full items-center justify-center">
                 <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
