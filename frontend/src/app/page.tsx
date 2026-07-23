@@ -22,8 +22,8 @@ export default async function Home() {
     <div className="bg-[#0a0a0a] gap-24">
       <Hero backgroundImage={byKey.hero_background ?? null} />
       <ScrollImageReveal imagePublicId={byKey.scroll_reveal ?? null} />
-      <PresidentMessage photoPublicId={byKey.president_photo ?? null} />
       <WhereWeWork />
+      <PresidentMessage photoPublicId={byKey.president_photo ?? null} />
       <InterestedSection slides={slides ?? []} />
       <FAQSection />
       <Footer />

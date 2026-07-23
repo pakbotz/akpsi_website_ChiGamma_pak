@@ -60,6 +60,8 @@ export default function RushCarousel({ slides }: { slides: Slide[] }) {
                 )}
               </div>
               <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">{slide.caption}</p>
+              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">🗒: Coming Soon!</p>
+              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">⚲: Coming Soon!</p>
             </div>
           ))}
         </div>

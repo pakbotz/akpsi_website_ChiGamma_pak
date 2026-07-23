@@ -128,9 +128,6 @@ export default function ScrollImageReveal({
                 alt="Chi Gamma brothers"
                 fill
                 sizes="78vw"
-                aspectRatio="4:5"
-                crop="fill"
-                gravity="auto"
                 quality="auto"
                 format="auto"
                 className="object-cover"
