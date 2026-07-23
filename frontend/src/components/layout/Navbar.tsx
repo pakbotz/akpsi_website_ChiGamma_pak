@@ -4,18 +4,21 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
+import { Menu } from 'lucide-react';
 import FullscreenMenu from './FullscreenMenu';
 
 // ─── Main Navbar ───────────────────────────────────────────────────
-// Single navbar for the whole site. The home page ("/") is dark-themed
-// (black background, cream text) while every other page so far is
-// light-themed (off-white background, near-black text) — this component
-// reads the current route and switches its own colors accordingly, so
-// there's only ever one nav rendered, one "Menu" button, one place to fix.
+// Single navbar for the whole site. The home page ("/") and the Brothers
+// directory ("/brothers" and its sub-routes) are dark-themed (black
+// background, cream text) while every other page so far is light-themed
+// (off-white background, near-black text) — this component reads the
+// current route and switches its own colors accordingly, so there's only
+// ever one nav rendered, one "Menu" button, one place to fix.
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isDark = pathname === '/';
+  const isBrothersPage = pathname.startsWith('/brothers');
+  const isDark = pathname === '/' || isBrothersPage;
 
   return (
     <>
@@ -36,21 +39,24 @@ export default function Navbar() {
 
         {/* Right side: CTA + Menu toggle */}
         <div className="flex items-center gap-8">
-          <Link
-            href="/rush"
-            className={`hidden text-sm underline underline-offset-4 md:block ${
-              isDark ? 'text-[#f0eeea]' : 'text-[#0a0a0a]'
-            }`}
-          >
-            Rush AKΨ
-          </Link>
+          {!isBrothersPage && (
+            <Link
+              href="/rush"
+              className={`hidden text-sm underline underline-offset-4 md:block ${
+                isDark ? 'text-[#f0eeea]' : 'text-[#0a0a0a]'
+              }`}
+            >
+              Rush AKΨ
+            </Link>
+          )}
           <button
             onClick={() => setMenuOpen(true)}
-            className={`text-sm transition-opacity hover:opacity-60 ${
+            aria-label="Open menu"
+            className={`transition-opacity hover:opacity-60 ${
               isDark ? 'text-[#f0eeea]/90' : 'text-[#0a0a0a]'
             }`}
           >
-            Menu
+            <Menu size={20} />
           </button>
         </div>
       </header>
