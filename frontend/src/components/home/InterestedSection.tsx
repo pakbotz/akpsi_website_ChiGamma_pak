@@ -1,6 +1,7 @@
 import RushCarousel from '@/components/ui/RushCarousel';
+import type { RushCarouselSlide } from '@/lib/types';
 
-export default function InterestedSection() {
+export default function InterestedSection({ slides }: { slides: RushCarouselSlide[] }) {
   return (
     <section className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
       <div className="mx-auto max-w-8xl px-6">
@@ -12,12 +13,12 @@ export default function InterestedSection() {
             Interested in Joining?
           </h2>
           <p className="max-w-sm text-sm text-white/45">
-            Become part of the world's largest and oldest business fraternity. 
+            Become part of the world&apos;s largest and oldest business fraternity.
             Develop professionally, build lasting friendships, and create opportunities for your future.
           </p>
         </div>
 
-        <RushCarousel />
+        <RushCarousel slides={slides} />
       </div>
     </section>
   );

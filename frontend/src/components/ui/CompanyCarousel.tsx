@@ -1,33 +1,39 @@
+// CompanyCarousel.tsx
 'use client';
 
-// Placeholder company names — swap for real logo assets via Cloudinary later.
-const COMPANIES = [
-  'Company One',
-  'Company Two',
-  'Company Three',
-  'Company Four',
-  'Company Five',
-  'Company Six',
-  'Company Seven',
-  'Company Eight',
-];
+import { CldImage } from 'next-cloudinary';
 
-function LogoRow({ ariaHidden = false }: { ariaHidden?: boolean }) {
+type Logo = { key: string; cloudinaryPublicId: string };
+
+function LogoRow({ logos, ariaHidden = false }: { logos: Logo[]; ariaHidden?: boolean }) {
   return (
     <div className="flex shrink-0 items-center gap-16 px-8" aria-hidden={ariaHidden}>
-      {COMPANIES.map((name, i) => (
-        <span
-          key={name + i}
-          className="whitespace-nowrap text-2xl font-medium tracking-tight text-white/25 transition-colors duration-300 hover:text-white/60 sm:text-3xl"
-        >
-          {name}
-        </span>
+      {logos.map((logo) => (
+        <div key={logo.key} className="relative h-10 w-28 shrink-0 sm:h-12 sm:w-36">
+          <CldImage
+            src={logo.cloudinaryPublicId}
+            alt="Company logo"
+            fill
+            crop="fit"
+            className="object-contain opacity-40 grayscale transition-all duration-300 hover:opacity-80 hover:grayscale-0"
+          />
+        </div>
       ))}
     </div>
   );
 }
 
-export default function CompanyCarousel() {
+// Only logos that have actually been uploaded render — an empty slot in the
+// admin dashboard just means one fewer logo in the loop, not a broken image.
+export default function CompanyCarousel({ logos }: { logos: Logo[] }) {
+  if (logos.length === 0) {
+    return (
+      <p className="px-6 text-center text-xs uppercase tracking-[0.2em] text-white/25">
+        Logos coming soon
+      </p>
+    );
+  }
+
   return (
     <div className="relative w-full overflow-hidden">
       {/* edge fades */}
@@ -35,8 +41,8 @@ export default function CompanyCarousel() {
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#0a0a0a] to-transparent sm:w-32" />
 
       <div className="marquee-track flex w-max items-center py-2">
-        <LogoRow />
-        <LogoRow ariaHidden />
+        <LogoRow logos={logos} />
+        <LogoRow logos={logos} ariaHidden />
       </div>
     </div>
   );

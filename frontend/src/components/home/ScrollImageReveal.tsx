@@ -4,12 +4,12 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CldImage } from 'next-cloudinary';
+
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const SCROLL_IMAGE_PUBLIC_ID = 'IMG_6106_bokoyu'
-/**cd 
+/**
  * Signature scroll sequence, three phases inside one pinned section:
  *
  *  Phase A (0 -> 0.25 of scroll) — image grows from its entrance size up to
@@ -19,11 +19,8 @@ const SCROLL_IMAGE_PUBLIC_ID = 'IMG_6106_bokoyu'
  *    keeps scrolling. This is the short "spotlight" moment.
  *  Phase C (0.35 -> 1.0 of scroll) — image gradually shrinks AND moves down
  *    the page to land exactly on top of `shrinkTargetRef` — a small, real
- *    image block that sits beside the body copy below the headline (no more
- *    awkward inline slot wedged inside the text). The headline + paragraph
- *    fade in as the image settles into place. This phase gets the largest
- *    share of the timeline so the "fall into place" motion stays clearly
- *    visible even though the total pinned scroll distance is short.
+ *    image block that sits beside the body copy below the headline. The
+ *    headline + paragraph fade in as the image settles into place.
  *
  * The whole section is pinned for its entire scroll distance, so the image
  * never drifts up/down on its own — only the tweened phases move it, and the
@@ -35,11 +32,13 @@ const SCROLL_IMAGE_PUBLIC_ID = 'IMG_6106_bokoyu'
  * `position: relative` + `overflow-hidden` ancestor, which is exactly what
  * `pinRef` is. That containment is a CSS/layout guarantee enforced by the
  * browser itself, true on first paint before any JS has run, true on
- * refresh at any scroll position, true in every direction. No visibility
- * toggling, no "hide until scrolled a bit" logic needed at all — the image
- * simply cannot render outside this section's box.
+ * refresh at any scroll position, true in every direction.
  */
-export default function ScrollImageReveal() {
+export default function ScrollImageReveal({
+  imagePublicId,
+}: {
+  imagePublicId: string | null;
+}) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
@@ -63,7 +62,6 @@ export default function ScrollImageReveal() {
           start: 'top top',
           // Total pinned scroll distance — tune this number to control how
           // long the whole sequence (grow + hold + shrink) takes to play out.
-          // Bigger = more scrolling required, smaller = faster.
           end: '+=100%',
           scrub: 1,
           pin: pinRef.current,
@@ -94,9 +92,6 @@ export default function ScrollImageReveal() {
         {
           width: () => shrinkTargetRef.current!.offsetWidth,
           height: () => shrinkTargetRef.current!.offsetHeight,
-          // imgRef is absolute *inside pinRef*, so its top/left need to be
-          // expressed relative to pinRef's own box, not the raw viewport —
-          // subtract pinRef's rect from the target's rect to convert.
           top: () => {
             const targetRect = shrinkTargetRef.current!.getBoundingClientRect();
             const pinRect = pinRef.current!.getBoundingClientRect();
@@ -109,12 +104,6 @@ export default function ScrollImageReveal() {
           },
           xPercent: 0,
           yPercent: 0,
-          // This duration is the one to change if you want the "falling
-          // into place" motion to play out over more (bigger number) or
-          // less (smaller number) of the scroll. It's a fraction of the
-          // whole timeline, which itself spans the full pinned scroll
-          // distance set by `end` above — so the same number reads as a
-          // slower fall on a longer `end` and a faster fall on a shorter one.
           duration: 0.65,
           ease: 'none',
         },
@@ -127,22 +116,15 @@ export default function ScrollImageReveal() {
 
   return (
     <section ref={wrapRef} className="relative bg-[#0a0a0a]">
-      {/* Pinned viewport-height stage — this whole block stays fixed in the
-          viewport for the full scroll distance defined by `end` above.
-          `relative` + `overflow-hidden` here is what physically contains
-          the absolutely-positioned image below — it cannot render outside
-          this box, on the Hero or anywhere else, under any circumstances. */}
       <div ref={pinRef} className="relative h-screen w-full overflow-hidden">
-        {/* Image — absolutely positioned *within pinRef*, so GSAP can tween
-            it freely but the browser guarantees it stays clipped inside
-            this section no matter when/where the page loads or refreshes. */}
         <div
           ref={imgRef}
           className="absolute left-1/2 top-1/2 z-20 aspect-video w-[58vw] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-sm bg-[#1c1c1c]"
         >
           <div className="flex relative overflow-hidden h-full w-full items-center justify-center">
-            <CldImage
-                src={SCROLL_IMAGE_PUBLIC_ID}
+            {imagePublicId ? (
+              <CldImage
+                src={imagePublicId}
                 alt="Chi Gamma brothers"
                 fill
                 sizes="78vw"
@@ -151,39 +133,19 @@ export default function ScrollImageReveal() {
                 className="object-cover"
                 preload
               />
+            ) : (
+              <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
+                Placeholder Image
+              </span>
+            )}
           </div>
         </div>
-
       </div>
 
-      {/* Headline + body copy, text wraps around the small image rather than
-          having the image embedded inline inside the headline itself. */}
       <div
         ref={contentRef}
         className="section-spacing relative z-10 mx-auto px-6 opacity-0"
       >
-        
-
-        {/* Small image sits beside the paragraph — this is the real DOM
-            element the big image shrinks down and travels to land on. */}
-        <div className="mx-auto mt-12 flex flex-col items-center gap-8">
-          <div
-            ref={shrinkTargetRef}
-            className="aspect-video w-full max-w-3xl shrink-0 rounded-sm bg-[#1c1c1c] "
-          >
-            <div className="flex relative overflow-hidden h-full w-full items-center justify-center">
-              <CldImage
-                src={SCROLL_IMAGE_PUBLIC_ID}
-                alt="Chi Gamma brothers"
-                fill
-                sizes="78vw"
-                quality="auto"
-                format="auto"
-                className="object-cover"
-              />
-            </div>
-          </div>
-          
         <h2
           className="text-center font-medium leading-[0.95] tracking-tight text-[#f0eeea]"
           style={{ fontSize: 'clamp(2.25rem, 6.5vw, 5.5rem)' }}
@@ -192,6 +154,31 @@ export default function ScrollImageReveal() {
           <br />
           Shaping Business
         </h2>
+
+        <div className="mx-auto mt-12 flex flex-col items-center gap-8">
+          <div
+            ref={shrinkTargetRef}
+            className="aspect-video w-full max-w-3xl shrink-0 rounded-sm bg-[#1c1c1c]"
+          >
+            <div className="flex relative overflow-hidden h-full w-full items-center justify-center">
+              {imagePublicId ? (
+                <CldImage
+                  src={imagePublicId}
+                  alt="Chi Gamma brothers"
+                  fill
+                  sizes="78vw"
+                  quality="auto"
+                  format="auto"
+                  className="object-cover"
+                />
+              ) : (
+                <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
+                  Placeholder Image
+                </span>
+              )}
+            </div>
+          </div>
+
           <p className="text-base leading-relaxed text-white/45">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi
