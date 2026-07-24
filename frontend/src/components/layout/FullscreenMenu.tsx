@@ -15,8 +15,6 @@ const NAV_LINKS = [
 
 const BROTHERS_LINKS = [
   { label: 'All Brothers', href: '/brothers' },
-  { label: 'Brothers by Role', href: '/brothers/role' },
-  { label: 'Brothers by Class', href: '/brothers/class' },
   { label: 'Alumni Spotlights', href: '/brothers/alumni' },
 ];
 
