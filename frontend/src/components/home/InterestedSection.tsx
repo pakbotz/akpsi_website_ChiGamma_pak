@@ -1,8 +1,7 @@
 import RushCarousel from '@/components/ui/RushCarousel';
+import type { RushCarouselSlide } from '@/lib/types';
 
-type Slide = { cloudinary_public_id: string | null; caption: string };
-
-export default function InterestedSection({ slides }: { slides: Slide[] }) {
+export default function InterestedSection({ slides }: { slides: RushCarouselSlide[] }) {
   return (
     <section className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
       <div className="mx-auto max-w-8xl px-6">

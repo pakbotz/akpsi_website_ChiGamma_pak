@@ -4,7 +4,15 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { CldImage } from 'next-cloudinary';
 
-export default function PresidentMessage({ photoPublicId }: { photoPublicId: string | null }) {
+export default function PresidentMessage({
+  photoPublicId,
+  name,
+  message,
+}: {
+  photoPublicId: string | null;
+  name: string;
+  message: string;
+}) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -62,17 +70,10 @@ export default function PresidentMessage({ photoPublicId }: { photoPublicId: str
             >
               Message from our President
             </h2>
-            <p className="text-base leading-relaxed text-white/55 sm:text-lg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+            <p className="whitespace-pre-line text-base leading-relaxed text-white/55 sm:text-lg">
+              {message}
             </p>
-            <p className="mt-8 text-sm tracking-wide text-white/40">
-              — Placeholder Name, Chapter President
-            </p>
+            <p className="mt-8 text-sm tracking-wide text-white/40">— {name}</p>
           </div>
         </div>
       </div>

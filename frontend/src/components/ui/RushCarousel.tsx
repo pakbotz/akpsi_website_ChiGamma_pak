@@ -5,7 +5,12 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { CldImage } from 'next-cloudinary';
 
-type Slide = { cloudinary_public_id: string | null; caption: string };
+type Slide = {
+  cloudinary_public_id: string | null;
+  caption: string;
+  location: string | null;
+  event_datetime: string | null;
+};
 
 export default function RushCarousel({ slides }: { slides: Slide[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -60,8 +65,12 @@ export default function RushCarousel({ slides }: { slides: Slide[] }) {
                 )}
               </div>
               <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">{slide.caption}</p>
-              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">🗒: Coming Soon!</p>
-              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">⚲: Coming Soon!</p>
+              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">
+                🗒: {slide.location || 'Coming Soon!'}
+              </p>
+              <p className="mt-4 text-xs uppercase tracking-[0.15em] text-white/45">
+                ⚲: {slide.event_datetime || 'Coming Soon!'}
+              </p>
             </div>
           ))}
         </div>

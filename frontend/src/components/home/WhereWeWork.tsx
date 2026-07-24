@@ -1,6 +1,11 @@
+// WhereWeWork.tsx
 import CompanyCarousel from '@/components/ui/CompanyCarousel';
 
-export default function WhereWeWork() {
+export default function WhereWeWork({
+  logos,
+}: {
+  logos: { key: string; cloudinaryPublicId: string }[];
+}) {
   return (
     <section className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6 w-full">
@@ -20,7 +25,7 @@ export default function WhereWeWork() {
         </button>
       </div>
 
-      <CompanyCarousel />
+      <CompanyCarousel logos={logos} />
     </section>
   );
 }
