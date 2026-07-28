@@ -156,7 +156,7 @@ export default function BrothersList({
                   </div>
                 </td>
                 <td className="py-3 pr-4">
-                  <Link href={`/admin/brothers/${b.id}`} className="hover:text-[#c8b89a]">
+                  <Link href={`/admin/dashboard/brothers/${b.id}`} className="hover:text-[#c8b89a]">
                     {b.name}
                   </Link>
                   {(b.is_executive || b.is_board) && (
@@ -179,7 +179,7 @@ export default function BrothersList({
                 </td>
                 <td className="py-3 pr-4 text-right">
                   <Link
-                    href={`/admin/brothers/${b.id}`}
+                    href={`/admin/dashboard/brothers/${b.id}`}
                     className="mr-4 text-xs uppercase tracking-[0.1em] text-white/50 hover:text-[#c8b89a]"
                   >
                     Edit

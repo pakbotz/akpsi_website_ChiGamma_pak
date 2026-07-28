@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import ImageUploadCard from '@/components/admin/ImageUploadCard';
 import EditableField from '@/components/admin/EditableField';
+import PastPositionsField from '@/components/admin/PastPositionsField';
 import type { Brother, PledgeClass } from '@/lib/types';
 
 export default function BrotherEditor({
@@ -35,13 +36,13 @@ export default function BrotherEditor({
   async function deleteBrother() {
     if (!confirm(`Remove ${b.name}? This can't be undone.`)) return;
     await supabase.from('brothers').delete().eq('id', b.id);
-    router.push('/admin/brothers');
+    router.push('/admin/dashboard/brothers');
   }
 
   return (
     <div>
       <div className="mb-8 flex items-center justify-between">
-        <Link href="/admin/brothers" className="text-sm text-white/50 hover:text-white">
+        <Link href="/admin/dashboard/brothers" className="text-sm text-white/50 hover:text-white">
           &larr; Back to Brothers
         </Link>
         <button
@@ -83,7 +84,7 @@ export default function BrotherEditor({
             saving={savingField === 'name'}
           />
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             <EditableField
               label="Grade"
               value={b.grade ?? ''}
@@ -97,6 +98,14 @@ export default function BrotherEditor({
               onChange={(v) => setB((prev) => ({ ...prev, major: v }))}
               onCommit={(v) => save('major', v)}
               saving={savingField === 'major'}
+            />
+
+            <EditableField
+              label="Minor"
+              value={b.minor ?? ''}
+              onChange={(v) => setB((prev) => ({ ...prev, minor: v }))}
+              onCommit={(v) => save('minor', v)}
+              saving={savingField === 'minor'}
             />
           </div>
 
@@ -147,7 +156,21 @@ export default function BrotherEditor({
                 Board Position
               </label>
             </div>
+              <PastPositionsField
+                value={b.past_positions ?? []}
+                onCommit={(v) => save('past_positions', v)}
+                saving={savingField === 'past_positions'}
+              />
           </div>
+          
+          <EditableField
+            label="Email"
+            value={b.email ?? ''}
+            onChange={(v) => setB((prev) => ({ ...prev, email: v }))}
+            onCommit={(v) => save('email', v)}
+            placeholder="name@ucsc.edu"
+            saving={savingField === 'email'}
+          />         
 
           <EditableField
             label="LinkedIn link"

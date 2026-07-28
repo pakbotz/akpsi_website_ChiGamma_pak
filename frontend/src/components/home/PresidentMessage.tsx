@@ -17,7 +17,7 @@ export default function PresidentMessage({
 
   return (
     <section className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
-      <div className="w-full max-w-6xl mx-auto px-6 ">
+      <div className="w-full max-w-6xl mx-auto çpx-6 ">
         <p className="mb-12 text-xs uppercase tracking-[0.25em] text-[#c8b89a]">
           A Note From Leadership
         </p>
