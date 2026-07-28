@@ -8,7 +8,7 @@ export default function WhereWeWork({
 }) {
   return (
     <section className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-6 w-full">
+      <div className="w-full max-w-6xlm x-auto px-8">
         <h2
           className="mb-4 font-medium tracking-tight text-[#f0eeea]"
           style={{ fontSize: 'clamp(2rem, 4.2vw, 3.25rem)' }}

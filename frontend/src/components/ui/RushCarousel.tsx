@@ -50,7 +50,8 @@ export default function RushCarousel({ slides }: { slides: Slide[] }) {
                   <CldImage
                     src={slide.cloudinary_public_id}
                     alt={slide.caption}
-                    fill
+                    fill 
+                    sizes="(max-width: 768px) 33vw, 33vw"
                     aspectRatio="4:5"
                     crop="fill"
                     gravity="auto"

@@ -1,28 +1,25 @@
 export default function Footer() {
     return (
-      <footer className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
-        <div className="mx-auto">
+      <footer className="bg-[#0a0a0a]  flex flex-col justify-center py-20 md:py-28">
+        <div className="w-full px-6 md:px-12">
           {/* Top: flag/logo left, wordmark right */}
           <div className="flex items-start justify-between">
-            <span className="text-sm tracking-wide text-white/50">
-              ΑΚΨ<sup className="text-[10px]">®</sup>
-            </span>
-  
+
+            <p className="max-w-xl text-2xl leading-snug text-white/80 sm:text-3xl">
+              For recruitment updates, follow our instagram{' '}
+              <span className="text-white">@ucscakpsi</span>
+            </p>
+            
             <span
               className="font-medium leading-none tracking-tight text-[#f0eeea]"
               style={{ fontSize: 'clamp(2.5rem, 9vw, 7rem)' }}
             >
               AKΨ
             </span>
+
+            
           </div>
-  
-          {/* CTA line */}
-          <div className="mt-20 sm:mt-28">
-            <p className="max-w-xl text-2xl leading-snug text-white/80 sm:text-3xl">
-              For recruitment updates, follow our instagram{' '}
-              <span className="text-white">@ucscakpsi</span>
-            </p>
-          </div>
+
   
           <div className="mt-20 border-t border-white/10 pt-12 sm:mt-28">
             <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">

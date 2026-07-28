@@ -3,8 +3,8 @@ import type { RushCarouselSlide } from '@/lib/types';
 
 export default function InterestedSection({ slides }: { slides: RushCarouselSlide[] }) {
   return (
-    <section className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
-      <div className="mx-auto max-w-8xl px-6">
+    <section className="bg-[#0a0a0a] min-height:90vh flex flex-col justify-center py-20 md:py-28">
+      <div className="w-full max-w-7xl mx-auto px-8">
         <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <h2
             className="font-medium tracking-tight text-[#f0eeea]"
