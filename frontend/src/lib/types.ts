@@ -26,6 +26,7 @@ export type Brother = {
   bio: string | null;
   cloudinary_public_id: string | null;
   sort_order: number;
+  grad_year : number | null;
 };
 
 export type CareerBrother = {

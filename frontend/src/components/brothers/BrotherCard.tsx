@@ -37,7 +37,7 @@ export default function BrotherCard({
             {brother.name}
           </h2>
           <span
-            className="shrink-0 text-lg text-[#c8b89a]"
+            className="font-[Palatino_Linotype] shrink-0 text-lg text-[#c8b89a]"
             title={brother.pledgeClass}
           >
             {toGreekLetter(brother.pledgeClass)}
@@ -50,7 +50,7 @@ export default function BrotherCard({
         </p>
 
         <p className="mt-1 text-xs uppercase tracking-[0.1em] text-white/40">
-          Class of {brother.year}
+          {brother.currentYear ?? '—'}
         </p>
 
         {brother.positions.length > 0 && (

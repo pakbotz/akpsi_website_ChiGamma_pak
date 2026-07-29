@@ -8,7 +8,7 @@ import { CldImage } from 'next-cloudinary';
 import { createClient } from '@/lib/supabase/client';
 import type { PledgeClass } from '@/lib/types';
 
-type BrotherRow = {
+export type BrotherRow = {
   id: string;
   name: string;
   active: boolean;
@@ -20,7 +20,7 @@ type BrotherRow = {
   // when there's no generated Database type to tell it this is actually a
   // many-to-one (each brother has at most one class), so this is a 0-or-1
   // element array at runtime even though it's logically a single record.
-  classes: { greek_letter: string; name: string }[] | null;
+  classes: { greek_letter: string; name: string } | null;
 };
 
 export default function BrothersList({
@@ -147,10 +147,12 @@ export default function BrothersList({
                       <CldImage
                         src={b.cloudinary_public_id}
                         alt={b.name}
+                        loading="lazy"
                         fill
                         crop="fill"
                         gravity="face"
                         className="object-cover"
+                        sizes="(max-width: 768px) 40px, 48px"
                       />
                     )}
                   </div>
@@ -166,7 +168,8 @@ export default function BrothersList({
                   )}
                 </td>
                 <td className="py-3 pr-4 text-white/60">
-                  {b.classes?.[0] ? `${b.classes[0].greek_letter} — ${b.classes[0].name}` : '—'}
+             
+                  {b.classes ? `${b.classes.greek_letter} — ${b.classes.name}` : '—'}
                 </td>
                 <td className="py-3 pr-4">
                   <input

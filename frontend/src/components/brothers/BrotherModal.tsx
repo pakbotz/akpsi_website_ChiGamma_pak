@@ -121,17 +121,17 @@ export default function BrotherModal({
               )}
               <div className="text-center">
                 <p className="text-xs uppercase tracking-[0.2em] text-white/40">
-                  Class
+                  Year
                 </p>
                 <p className="mt-1 text-sm text-white/85">
-                  {brother.year}
+                  {brother.currentYear ?? '—'}
                 </p>
               </div>
               <div className="text-center">
                 <p className="text-xs uppercase tracking-[0.2em] text-white/40">
                   Pledge Class
                 </p>
-                <p className="mt-1 text-sm text-[#c8b89a]" title={brother.pledgeClass}>
+                <p className="font-[Palatino_Linotype] mt-1 text-sm text-[#c8b89a]" title={brother.pledgeClass}>
                   {toGreekLetter(brother.pledgeClass)}
                 </p>
               </div>

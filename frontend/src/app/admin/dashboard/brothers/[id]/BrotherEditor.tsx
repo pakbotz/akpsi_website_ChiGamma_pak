@@ -9,6 +9,7 @@ import ImageUploadCard from '@/components/admin/ImageUploadCard';
 import EditableField from '@/components/admin/EditableField';
 import PastPositionsField from '@/components/admin/PastPositionsField';
 import type { Brother, PledgeClass } from '@/lib/types';
+import { getGradeLabel } from '@/lib/gradeLevel';
 
 export default function BrotherEditor({
   brother,
@@ -92,6 +93,8 @@ export default function BrotherEditor({
               onCommit={(v) => save('grade', v)}
               saving={savingField === 'grade'}
             />
+
+            
             <EditableField
               label="Major"
               value={b.major ?? ''}
@@ -108,7 +111,24 @@ export default function BrotherEditor({
               saving={savingField === 'minor'}
             />
           </div>
-
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-[0.15em] text-white/50">
+              Graduation Year
+              {b.grad_year && (
+                <span className="normal-case text-white/30"> · currently {getGradeLabel(b.grad_year)}</span>
+              )}
+            </label>
+            <input
+              type="number"
+              value={b.grad_year ?? ''}
+              onChange={(e) =>
+                setB((prev) => ({ ...prev, grad_year: e.target.value ? Number(e.target.value) : null }))
+              }
+              onBlur={(e) => save('grad_year', e.target.value ? Number(e.target.value) : null)}
+              placeholder="e.g. 2027"
+              className="w-full border-b border-white/20 bg-transparent py-2 text-white placeholder:text-white/30 focus:border-[#c8b89a] focus:outline-none"
+            />
+          </div>
           <div>
             <label className="mb-2 block text-xs uppercase tracking-[0.15em] text-white/50">
               Class
@@ -162,7 +182,7 @@ export default function BrotherEditor({
                 saving={savingField === 'past_positions'}
               />
           </div>
-          
+
           <EditableField
             label="Email"
             value={b.email ?? ''}

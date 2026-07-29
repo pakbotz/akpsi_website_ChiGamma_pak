@@ -2,17 +2,22 @@
 
 import { useMemo, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Brother, brothers } from '@/lib/brothers';
-import { CHAPTER_PLEDGE_CLASSES } from '@/lib/greekAlphabet';
+import { Brother } from '@/lib/brothers';
+import { sortByGreekOrder } from '@/lib/greekAlphabet';
 import BoardFilter, { BoardFilterValue } from './BoardFilter';
 import BrotherCard from './BrotherCard';
 import BrotherModal from './BrotherModal';
 import PledgeClassFilter, { ALL_CLASSES } from './PledgeClassFilter';
 
-export default function BrotherDirectory() {
+export default function BrotherDirectory({ brothers }: { brothers: Brother[] }) {
   const [selectedClass, setSelectedClass] = useState<string>(ALL_CLASSES);
   const [boardFilter, setBoardFilter] = useState<BoardFilterValue>('All Brothers');
   const [selectedBrother, setSelectedBrother] = useState<Brother | null>(null);
+
+  const availableClasses = useMemo(() => {
+    const distinct = Array.from(new Set(brothers.map((b) => b.pledgeClass).filter(Boolean)));
+    return sortByGreekOrder(distinct);
+  }, [brothers]);
 
   const visibleBrothers = useMemo(() => {
     return brothers.filter((b) => {
@@ -21,7 +26,7 @@ export default function BrotherDirectory() {
       if (selectedClass !== ALL_CLASSES && b.pledgeClass !== selectedClass) return false;
       return true;
     });
-  }, [selectedClass, boardFilter]);
+  }, [brothers, selectedClass, boardFilter]);
 
   return (
     <section className="min-h-dvh bg-[#0a0a0a] px-6 py-20 md:py-28">
@@ -39,7 +44,7 @@ export default function BrotherDirectory() {
 
           <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
             <PledgeClassFilter
-              options={CHAPTER_PLEDGE_CLASSES}
+              options={availableClasses}
               selected={selectedClass}
               onChange={setSelectedClass}
             />

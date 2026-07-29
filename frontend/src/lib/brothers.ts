@@ -1,145 +1,96 @@
 // ─── Brother directory data ────────────────────────────────────────
-// Placeholder dataset for the front-end design pass. Every value here
-// is a stand-in — once the backend/CMS is wired up, swap this array
-// for a fetch (e.g. `getBrothers()` in src/lib/api.ts) and delete the
-// mock entries below. The shape of `Brother` is the real contract.
+// `Brother` is the shape the frontend components (BrotherCard,
+// BrotherModal, BrotherDirectory) are built around. `getBrothers()`
+// fetches the real data from Supabase and maps each row into this shape —
+// call it from a Server Component (see app/brothers/page.tsx) and pass
+// the result down as a prop; don't import it into a 'use client' file,
+// since it depends on the server-only Supabase client (cookies()).
+
+import { getCldImageUrl } from 'next-cloudinary';
+import { createClient } from '@/lib/supabase/server';
+import { getGradeLabel } from '@/lib/gradeLevel';
 
 export interface Brother {
   id: string;
   name: string;
-  photoUrl: string; // will eventually be a Cloudinary URL
+  photoUrl: string; // Cloudinary delivery URL, or '' if no photo uploaded yet
   major: string;
   minor?: string;
-  year: number; // expected graduation year, e.g. 2027
+  currentYear?: string; // computed standing, e.g. "3rd year" — see lib/gradeLevel.ts. The raw grad_year this is derived from stays admin-only and is never exposed here.
   pledgeClass: string; // Greek letter designation — see src/lib/greekAlphabet.ts for chronological order
-  positions: string[]; // e.g. ["President", "Rush Chair"] — empty array if none
-  isExecTeam: boolean; // derived from positions, stored explicitly for easy filtering
-  isLowerBoard: boolean; // committee-chair tier, below exec — also derived from positions
+  positions: string[]; // current position(s) held — empty array if none
+  pastPositions: string[]; // positions previously held, most-senior-first (see admin PastPositionsField.tsx for the sort rule)
+  isExecTeam: boolean; // derived from is_executive, stored explicitly for easy filtering
+  isLowerBoard: boolean; // derived from is_board — committee-chair tier, below exec
   bio: string;
   linkedinUrl: string;
   email?: string;
 }
 
-export const brothers: Brother[] = [
-  {
-    id: '1',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    year: 2026,
-    pledgeClass: 'Omicron',
-    positions: ['President'],
-    isExecTeam: true,
-    isLowerBoard: false,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-    email: 'placeholder@ucsc.edu',
-  },
-  {
-    id: '2',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    minor: 'Minor Placeholder',
-    year: 2027,
-    pledgeClass: 'Pi',
-    positions: ['VP of Technology'],
-    isExecTeam: true,
-    isLowerBoard: false,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-  },
-  {
-    id: '3',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    year: 2027,
-    pledgeClass: 'Pi',
-    positions: [],
-    isExecTeam: false,
-    isLowerBoard: false,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-  },
-  {
-    id: '4',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    minor: 'Minor Placeholder',
-    year: 2025,
-    pledgeClass: 'Xi',
-    positions: ['Rush Chair'],
-    isExecTeam: false,
-    isLowerBoard: true,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-  },
-  {
-    id: '5',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    year: 2028,
-    pledgeClass: 'Lambda',
-    positions: [],
-    isExecTeam: false,
-    isLowerBoard: false,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-  },
-  {
-    id: '6',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    year: 2026,
-    pledgeClass: 'Omicron',
-    positions: ['Social Chair'],
-    isExecTeam: false,
-    isLowerBoard: true,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-  },
-  {
-    id: '7',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    year: 2025,
-    pledgeClass: 'Xi',
-    positions: [],
-    isExecTeam: false,
-    isLowerBoard: false,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-  },
-  {
-    id: '8',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    minor: 'Minor Placeholder',
-    year: 2028,
-    pledgeClass: 'Lambda',
-    positions: [],
-    isExecTeam: false,
-    isLowerBoard: false,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-  },
-  {
-    id: '9',
-    name: 'Brother Name',
-    photoUrl: '',
-    major: 'Major Placeholder',
-    year: 2026,
-    pledgeClass: 'Omicron',
-    positions: ['Historian'],
-    isExecTeam: false,
-    isLowerBoard: true,
-    bio: 'Placeholder bio copy goes here — a short paragraph about this brother.',
-    linkedinUrl: '#',
-  },
-];
+// Row shape as it comes back from Supabase — narrower than `Brother`,
+// since column names don't match the frontend's camelCase field names.
+type BrotherRow = {
+  id: string;
+  name: string;
+  cloudinary_public_id: string | null;
+  major: string | null;
+  minor: string | null;
+  grad_year: number | null;
+  position_title: string | null;
+  past_positions: string[] | null;
+  is_executive: boolean;
+  is_board: boolean;
+  linkedin_url: string | null;
+  email: string | null;
+  bio: string | null;
+  // PostgREST returns this as a single object, not an array, because the
+  // foreign key (class_id) lives on this table pointing at one classes row
+  // — a to-many embed (e.g. classes -> brothers) would be an array, but a
+  // to-one embed like this one isn't.
+  classes: { name: string } | null;
+};
+
+function mapRowToBrother(row: BrotherRow): Brother {
+  return {
+    id: row.id,
+    name: row.name,
+    photoUrl: row.cloudinary_public_id
+      ? getCldImageUrl({ src: row.cloudinary_public_id, crop: 'fill', gravity: 'auto', aspectRatio: '4:5' })
+      : '',
+    major: row.major ?? '',
+    minor: row.minor ?? undefined,
+    currentYear: getGradeLabel(row.grad_year),
+    pledgeClass: row.classes?.name ?? '',
+    positions: row.position_title ? [row.position_title] : [],
+    pastPositions: row.past_positions ?? [],
+    isExecTeam: row.is_executive,
+    isLowerBoard: row.is_board,
+    bio: row.bio ?? '',
+    linkedinUrl: row.linkedin_url ?? '',
+    email: row.email ?? undefined,
+  };
+}
+
+// Only active brothers are returned — draft/half-filled-in profiles that
+// haven't been checked "Active" in the admin dashboard stay hidden from
+// the public directory. (RLS itself stays open on this table so the admin
+// dashboard can still see and edit inactive brothers; this filter is what
+// actually enforces "active only" for the public page.)
+export async function getBrothers(): Promise<Brother[]> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('brothers')
+    .select(
+      'id, name, cloudinary_public_id, major, minor, grad_year, position_title, past_positions, is_executive, is_board, linkedin_url, email, bio, classes(name)'
+    )
+    .eq('active', true)
+    .order('name');
+
+  if (error || !data) return [];
+
+  // Same inference mismatch as the admin BrothersList query — Supabase's
+  // own TS types assume an array for this embed, but it's confirmed to be
+  // a plain object at runtime for this to-one relationship.
+  return (data as unknown as BrotherRow[]).map(mapRowToBrother);
+}
