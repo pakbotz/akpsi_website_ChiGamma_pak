@@ -20,7 +20,15 @@ export default function PledgeClassFilter({
       options={[ALL_CLASSES, ...options]}
       selected={selected}
       onChange={onChange}
-      renderLabel={toGreekLetter}
+      renderLabel={(option) =>
+        option === ALL_CLASSES ? (
+          option
+        ) : (
+          <span style={{ fontFamily: "'Palatino Linotype', Palatino, 'Book Antiqua', serif" }}>
+            {toGreekLetter(option)}
+          </span>
+        )
+      }
     />
   );
 }

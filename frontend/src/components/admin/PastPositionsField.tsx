@@ -2,25 +2,7 @@
 'use client';
 
 import { useState } from 'react';
-
-const PRIORITY_PREFIXES = ['President', 'Executive', 'VP'];
-
-// Rank 0/1/2 for President/Executive/VP (in that order), rank 3 for
-// everything else — lower rank sorts first.
-function positionRank(position: string): number {
-  const idx = PRIORITY_PREFIXES.findIndex((prefix) => position.startsWith(prefix));
-  return idx === -1 ? PRIORITY_PREFIXES.length : idx;
-}
-
-// Exported so BrotherEditor (or anywhere else that reads past_positions,
-// e.g. the future public Brothers page) can apply the same ordering without
-// re-implementing it.
-export function sortPastPositions(positions: string[]): string[] {
-  return [...positions].sort((a, b) => {
-    const rankDiff = positionRank(a) - positionRank(b);
-    return rankDiff !== 0 ? rankDiff : a.localeCompare(b);
-  });
-}
+import { sortPastPositions } from '@/lib/positionPriority';
 
 export default function PastPositionsField({
   value,

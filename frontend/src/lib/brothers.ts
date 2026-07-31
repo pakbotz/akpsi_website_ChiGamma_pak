@@ -6,14 +6,13 @@
 // the result down as a prop; don't import it into a 'use client' file,
 // since it depends on the server-only Supabase client (cookies()).
 
-import { getCldImageUrl } from 'next-cloudinary';
 import { createClient } from '@/lib/supabase/server';
 import { getGradeLabel } from '@/lib/gradeLevel';
 
 export interface Brother {
   id: string;
   name: string;
-  photoUrl: string; // Cloudinary delivery URL, or '' if no photo uploaded yet
+  cloudinaryPublicId: string | null; // pass straight to <CldImage>; null if no photo uploaded yet
   major: string;
   minor?: string;
   currentYear?: string; // computed standing, e.g. "3rd year" — see lib/gradeLevel.ts. The raw grad_year this is derived from stays admin-only and is never exposed here.
@@ -54,9 +53,7 @@ function mapRowToBrother(row: BrotherRow): Brother {
   return {
     id: row.id,
     name: row.name,
-    photoUrl: row.cloudinary_public_id
-      ? getCldImageUrl({ src: row.cloudinary_public_id, crop: 'fill', gravity: 'auto', aspectRatio: '4:5' })
-      : '',
+    cloudinaryPublicId: row.cloudinary_public_id,
     major: row.major ?? '',
     minor: row.minor ?? undefined,
     currentYear: getGradeLabel(row.grad_year),

@@ -1,3 +1,4 @@
+import { CldImage } from 'next-cloudinary';
 import { Brother } from '@/lib/brothers';
 import { toGreekLetter } from '@/lib/greekAlphabet';
 
@@ -15,12 +16,16 @@ export default function BrotherCard({
       className="group block w-full text-left"
     >
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#1c1c1c] transition-opacity group-hover:opacity-80">
-        {brother.photoUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={brother.photoUrl}
+        {brother.cloudinaryPublicId ? (
+          <CldImage
+            src={brother.cloudinaryPublicId}
             alt={brother.name}
-            className="h-full w-full object-cover"
+            fill
+            crop="fill"
+            gravity="auto"
+            format="auto"
+            quality="auto"
+            className="object-cover"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
@@ -37,7 +42,7 @@ export default function BrotherCard({
             {brother.name}
           </h2>
           <span
-            className="font-[Palatino_Linotype] shrink-0 text-lg text-[#c8b89a]"
+            className="shrink-0 font-['Palatino_Linotype'] text-lg text-[#c8b89a]"
             title={brother.pledgeClass}
           >
             {toGreekLetter(brother.pledgeClass)}

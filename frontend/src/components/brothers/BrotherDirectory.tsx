@@ -8,6 +8,7 @@ import BoardFilter, { BoardFilterValue } from './BoardFilter';
 import BrotherCard from './BrotherCard';
 import BrotherModal from './BrotherModal';
 import PledgeClassFilter, { ALL_CLASSES } from './PledgeClassFilter';
+import { positionRank } from '@/lib/positionPriority';
 
 export default function BrotherDirectory({ brothers }: { brothers: Brother[] }) {
   const [selectedClass, setSelectedClass] = useState<string>(ALL_CLASSES);
@@ -20,14 +21,23 @@ export default function BrotherDirectory({ brothers }: { brothers: Brother[] }) 
   }, [brothers]);
 
   const visibleBrothers = useMemo(() => {
-    return brothers.filter((b) => {
+    const filtered = brothers.filter((b) => {
       if (boardFilter === 'Executive' && !b.isExecTeam) return false;
       if (boardFilter === 'Lower' && !b.isLowerBoard) return false;
       if (selectedClass !== ALL_CLASSES && b.pledgeClass !== selectedClass) return false;
       return true;
     });
+  
+    if (boardFilter === 'Executive') {
+      return [...filtered].sort((a, b) => {
+        const rankDiff = positionRank(a.positions[0] ?? '') - positionRank(b.positions[0] ?? '');
+        return rankDiff !== 0 ? rankDiff : a.name.localeCompare(b.name);
+      });
+    }
+  
+    return filtered;
   }, [brothers, selectedClass, boardFilter]);
-
+  
   return (
     <section className="min-h-dvh bg-[#0a0a0a] px-6 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">

@@ -85,16 +85,7 @@ export default function BrotherEditor({
             saving={savingField === 'name'}
           />
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            <EditableField
-              label="Grade"
-              value={b.grade ?? ''}
-              onChange={(v) => setB((prev) => ({ ...prev, grade: v }))}
-              onCommit={(v) => save('grade', v)}
-              saving={savingField === 'grade'}
-            />
-
-            
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">          
             <EditableField
               label="Major"
               value={b.major ?? ''}

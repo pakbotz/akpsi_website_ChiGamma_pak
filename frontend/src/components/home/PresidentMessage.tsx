@@ -58,6 +58,9 @@ export default function PresidentMessage({
                 animate={{ y: hovered ? 0 : 12, opacity: hovered ? 1 : 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="border border-white/60 px-6 py-3 text-xs uppercase tracking-[0.2em] text-white transition-colors hover:bg-white hover:text-black"
+                onClick={() => {
+                  window.location.href = "/brothers";
+                }}
               >
                 View Profile
               </motion.button>
