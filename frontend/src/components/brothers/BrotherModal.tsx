@@ -96,6 +96,9 @@ export default function BrotherModal({
                   fill
                   crop="fill"
                   gravity="auto"
+                  sizes="(max-width: 768px) 50vw,
+                  (max-width: 1200px) 25vw,
+                  200px"
                   format="auto"
                   quality="auto"
                   className="object-cover"
@@ -128,7 +131,7 @@ export default function BrotherModal({
 
             <p className="mt-1 text-sm text-white/55">
               {brother.major}
-              {brother.minor ? ` · ${brother.minor}` : ''}
+              {brother.minor ? ` · ${brother.minor}` + ' Minor' : ''}
             </p>
 
             <div className="mt-4 flex flex-wrap items-center gap-3">

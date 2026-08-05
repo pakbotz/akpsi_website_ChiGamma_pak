@@ -23,6 +23,9 @@ export default function BrotherCard({
             fill
             crop="fill"
             gravity="auto"
+            sizes="(max-width: 768px) 50vw,
+            (max-width: 1200px) 25vw,
+            200px"
             format="auto"
             quality="auto"
             className="object-cover"
@@ -51,7 +54,7 @@ export default function BrotherCard({
 
         <p className="mt-1 text-sm text-white/55">
           {brother.major}
-          {brother.minor ? ` · ${brother.minor}` : ''}
+          {brother.minor ? ` · ${brother.minor}` + ' Minor': ''}
         </p>
 
         <p className="mt-1 text-xs uppercase tracking-[0.1em] text-white/40">

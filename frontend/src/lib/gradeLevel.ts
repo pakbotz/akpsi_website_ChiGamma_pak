@@ -9,13 +9,13 @@
 // public-facing Brother type (lib/brothers.ts) exposes just the computed
 // label from this function, never the raw year.
 
-const GRADE_LABELS = ['1st year', '2nd year', '3rd year', '4th year', '5th year'] as const;
+const GRADE_LABELS = ['1st', '2nd', '3rd', '4th', '5th'] as const;
 
 // UCSC's academic year turns over when Fall quarter starts (late
 // September), not on January 1st — someone who's a "4th year" in October
 // 2026 is still a 4th year in February 2027, even though the calendar
 // year changed. Month is 0-indexed, so 8 = September.
-const FALL_QUARTER_START_MONTH = 8;
+const FALL_QUARTER_START_MONTH = 7;
 
 function currentAcademicYear(today: Date): number {
   const isPastFallStart = today.getMonth() >= FALL_QUARTER_START_MONTH;
