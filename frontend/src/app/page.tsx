@@ -16,7 +16,7 @@ export default async function Home() {
     supabase.from('homepage_text_content').select('key, value'),
     supabase
       .from('rush_carousel_slides')
-      .select('id, cloudinary_public_id, caption, location, event_datetime')
+      .select('id, cloudinary_public_id, caption, location, event_datetime, instagram_post_url')
       .order('display_order'),
   ]);
 

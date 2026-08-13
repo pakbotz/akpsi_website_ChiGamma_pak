@@ -54,7 +54,7 @@ export default function Hero({ backgroundImage }: { backgroundImage: string | nu
               custom={i}
               variants={wordVariants}
               className="font-medium leading-none tracking-tight text-[#f0eeea] select-none"
-              style={{ fontSize: 'clamp(4.5rem, 22vw, 17rem)' }}
+              style={{ fontSize: 'clamp(4.5rem, 22vw, 17rem)'}}
             >
               {letter}
             </motion.span>
@@ -67,7 +67,7 @@ export default function Hero({ backgroundImage }: { backgroundImage: string | nu
           transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 max-w-md text-center text-sm tracking-[0.25em] uppercase text-white/40 sm:mt-10"
         >
-          Chi Gamma Chapter — UC Santa Cruz
+          Chi Gamma Chapter - UC Santa Cruz
         </motion.p>
       </div>
 

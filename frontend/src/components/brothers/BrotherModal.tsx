@@ -95,6 +95,7 @@ export default function BrotherModal({
                   alt={brother.name}
                   fill
                   crop="fill"
+                  loading="lazy"
                   gravity="auto"
                   sizes="(max-width: 768px) 50vw,
                   (max-width: 1200px) 25vw,

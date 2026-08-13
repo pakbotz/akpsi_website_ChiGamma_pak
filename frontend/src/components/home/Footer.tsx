@@ -27,23 +27,22 @@ export default function Footer() {
               <div>
                 <h3 className="mb-5 text-sm text-white">Organization</h3>
                 <ul className="flex flex-col gap-3 text-sm text-white/45">
-                  <li>Home</li>
-                  <li>About</li>
-                  <li>Careers</li>
-                  <li>Intern Spotlight</li>
-                  <li>Gallery</li>
-                  <li>Rush AKΨ</li>
+                  <li><a href="">Home</a></li>
+                  <li><a href="/about">About</a></li>
+                  <li><a href="/brothers">Our Brothers</a></li>
+                  <li><a href="/careers">Careers</a></li>
+                  <li><a href="/careers">Intern Spotlight</a></li>
+                  <li><a href="/gallery">Gallery</a></li>
+                  
                 </ul>
               </div>
   
-              {/* Brothers */}
+              {/* Get Involved */}
               <div>
-                <h3 className="mb-5 text-sm text-white">Brothers</h3>
+                <h3 className="mb-5 text-sm text-white">Get Involved!</h3>
                 <ul className="flex flex-col gap-3 text-sm text-white/45">
-                  <li>All Brothers</li>
-                  <li>Brothers by Class</li>
-                  <li>Brothers by Leadership</li>
-                  <li>Alumni List</li>
+                  <li><a href="/rush">Rush AKΨ</a></li>
+                  <li><a href="https://linktr.ee/ucscakpsi?utm_source=ig&utm_medium=social&utm_content=link_in_bio">Interest Form</a></li>
                 </ul>
               </div>
   
@@ -51,7 +50,7 @@ export default function Footer() {
               <div>
                 <h3 className="mb-5 text-sm text-white">Contact</h3>
                 <ul className="flex flex-col gap-3 text-sm text-white/45">
-                  <li>Contact Us</li>
+                  <li><a href="mailto:ucsc.akpsi@gmail.com" target="_blank">Contact Us</a></li>
                 </ul>
               </div>
             </div>

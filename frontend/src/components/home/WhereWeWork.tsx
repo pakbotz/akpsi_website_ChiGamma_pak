@@ -19,10 +19,12 @@ export default function WhereWeWork({
         <p className="mb-12 max-w-md text-base text-white/45">
           Our brothers venture into a wide variety of careers and industries.
         </p>
-
-        <button className="mb-16 border border-white/25 px-7 py-3 text-xs uppercase tracking-[0.2em] text-white/80 transition-colors hover:border-white/60 hover:text-white">
-          Where We Work
-        </button>
+        
+        <a href="/careers">
+          <button className="mb-16 border border-white/25 px-7 py-3 text-xs uppercase tracking-[0.2em] text-white/80 transition-colors hover:border-white/60 hover:text-white">
+            Our Careers
+          </button>
+        </a>
       </div>
 
       <CompanyCarousel logos={logos} />

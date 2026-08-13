@@ -40,7 +40,7 @@ export default function ScrollImageReveal({
         scrollTrigger: {
           trigger: wrapRef.current,
           start:   'top top',
-          end:     '+=200%',
+          end:     '+=175%',
           scrub:   1.5,
           pin:     pinRef.current,
           pinSpacing: true,
@@ -51,11 +51,13 @@ export default function ScrollImageReveal({
         .addLabel('shrink-start', 0.20);
 
       // Phase 2b: slow shrink (0.20 → 0.75)
-      tl.to(imgRef.current, {
-        width:    '34vw',
-        duration: 0.55,
-        ease:     'none',
-      }, 0.20);
+      tl.fromTo(imgRef.current, 
+        { width: '54vw' },
+        {
+          width:    '34vw',
+          duration: 0.55,
+         ease:     'none',
+        }, 0.20);
 
       // Phase 3: text reveal (0.75 → 0.88)
       tl.to(leftColRef.current,
@@ -81,7 +83,7 @@ export default function ScrollImageReveal({
 
         <div
           ref={imgRef}
-          className="absolute left-1/2 top-1/2 z-10 aspect-video w-[54vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-sm bg-[#1c1c1c]"
+          className="absolute left-1/2 top-1/2 z-10 aspect-video -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-sm bg-[#1c1c1c]"
         >
           {imagePublicId ? (
             <CldImage
@@ -109,11 +111,11 @@ export default function ScrollImageReveal({
           style={{ right: '70vw' }}
         >
           <span className="block font-medium leading-none tracking-tight text-[#f0eeea]"
-            style={{ fontSize: 'clamp(1.5rem, 3.5vw, 5rem)' }}>
+            style={{ fontSize: 'clamp(2.5rem, 3.5vw, 7rem)' }}>
             Shaping
           </span>
           <span className="block font-medium leading-none tracking-tight text-[#f0eeea]"
-            style={{ fontSize: 'clamp(1.5rem, 3.5vw, 5rem)' }}>
+            style={{ fontSize: 'clamp(2.5rem, 3.5vw, 7rem)' }}>
             People
           </span>
         </div>
@@ -124,23 +126,25 @@ export default function ScrollImageReveal({
           style={{ left: '70vw' }}
         >
           <span className="block font-medium leading-none tracking-tight text-[#f0eeea]"
-            style={{ fontSize: 'clamp(1.5rem, 3.5vw, 5rem)' }}>
+            style={{ fontSize: 'clamp(2.5rem, 3.5vw, 7rem)' }}>
             Shaping
           </span>
           <span className="block font-medium leading-none tracking-tight text-[#f0eeea]"
-            style={{ fontSize: 'clamp(1.5rem, 3.5vw, 5rem)' }}>
+            style={{ fontSize: 'clamp(2.5rem, 3.5vw, 7rem)' }}>
             Business
           </span>
 
         </div>
         <p
           ref={captionRef}
-          className="absolute left-1/2 z-20 w-[48vw] -translate-x-1/2 text-center text-base leading-relaxed text-white/45"
-          style={{ top: 'calc(50% + (48vw * 9/32) + .50rem)' }}
+          className="absolute left-1/2 z-20 w-[48vw] -translate-x-1/2 text-center font-small leading-relaxed text-white"
+          style={{ top: 'calc(50% + (48vw * 9/32) + .5rem)' , fontSize: 'clamp(1rem, 1vw, .5rem)' }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-          ut aliquip ex ea commodo consequat.
+          Alpha Kappa Psi, the world's oldest and largest co-ed professional business fraternity, was founded on October 5th, 1904. 
+          At the Chi Gamma Chapter here at UCSC, we empower the business leaders of tomorrow through professional development assistance 
+          and a network that lasts beyond graduation.
+          <br/>
+          All Majors accepted. One Brotherhood.
         </p>
 
       </div>

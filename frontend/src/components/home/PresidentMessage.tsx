@@ -17,7 +17,7 @@ export default function PresidentMessage({
 
   return (
     <section className="bg-[#0a0a0a] min-h-dvh flex flex-col justify-center py-20 md:py-28">
-      <div className="w-full max-w-[78rem] mx-auto px-6 ">
+      <div className="w-full max-w-[72rem] mx-auto px-6 ">
         <p className="mb-12 text-xs uppercase tracking-[0.25em] text-[#c8b89a]">
           A Note From Leadership
         </p>
@@ -33,7 +33,7 @@ export default function PresidentMessage({
                 src={photoPublicId} 
                 alt="Chapter President" 
                 fill 
-                sizes="(max-width: 768px) 50vw, 50vw"
+                sizes="(max-width: 768px) 40vw, 40vw"
                 aspectRatio="4:5"
                 crop="fill"
                 gravity="auto"
@@ -67,10 +67,10 @@ export default function PresidentMessage({
             </motion.div>
           </div>
 
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center max-h-[75dvh]">
             <h2
               className="mb-6 font-medium leading-[1.05] tracking-tight text-[#f0eeea]"
-              style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.75rem)' }}
+              style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.25rem)' }}
             >
               A Message from our President
             </h2>

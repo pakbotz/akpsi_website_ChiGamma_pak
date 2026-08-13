@@ -66,4 +66,5 @@ export type RushCarouselSlide = {
   caption: string;
   location: string | null;
   event_datetime: string | null;
+ instagram_post_url: string | null;
 };
