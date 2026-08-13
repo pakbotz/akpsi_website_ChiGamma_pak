@@ -14,10 +14,12 @@
   --color-accent: #c8b89a;   /* Gold — nod to AKPsi */
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 html, body {
