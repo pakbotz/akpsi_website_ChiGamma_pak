@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import type { RushEvent, RushTerm } from '@/lib/rushTerms';
+import { CldImage } from 'next-cloudinary';
 
 const GOLD = '#8a7148';
 
@@ -133,11 +134,18 @@ export default function RushTermView({
       <section className="mx-auto max-w-5xl px-6 pb-20 sm:px-8">
         <div className="grid grid-cols-1 items-center gap-10 sm:grid-cols-2 sm:gap-16">
           <div className="aspect-[4/5] w-full bg-neutral-200">
-            <div className="flex h-full w-full items-center justify-center">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400">
-                Placeholder Photo
-              </span>
-            </div>
+            <div className="flex relative overflow-hidden h-full w-full items-center justify-center">
+            <CldImage
+                src='20150103_171836_nyxmah'
+                alt="Chi Gamma brothers"
+                fill
+                sizes="33vw"
+                quality="auto"
+                format="auto"
+                className="object-cover"
+                preload
+              />
+          </div>
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-neutral-400">About This Term</p>
@@ -188,11 +196,19 @@ export default function RushTermView({
               viewport={{ once: true, margin: '-60px' }}
               className="aspect-[4/5] w-full bg-neutral-200"
             >
-              <div className="flex h-full w-full items-center justify-center">
-                <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400">
-                  Placeholder Photo
-                </span>
-              </div>
+              <div className="flex relative overflow-hidden h-full w-full items-center justify-center">
+            <CldImage
+                src='20150103_171836_nyxmah'
+                alt="Chi Gamma brothers"
+                fill
+                sizes="33vw"
+                quality="auto"
+                format="auto"
+                className="object-cover"
+                preload
+              />
+          </div>
+
             </motion.div>
           ))}
         </div>
