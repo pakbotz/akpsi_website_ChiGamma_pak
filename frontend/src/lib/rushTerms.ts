@@ -16,7 +16,7 @@ export type RushEvent = {
 // light theme, everything else maps to a bespoke themed view component
 // (see RushTermPage). Add a new theme by adding both a value here and a
 // matching view component.
-export type RushTermTheme = 'default' | 'arcteryx';
+export type RushTermTheme = 'default' | 'arcteryx' | 'bape';
 
 export type RushTerm = {
   slug: string;
@@ -70,6 +70,7 @@ export const RUSH_TERMS: RushTerm[] = [
     slug: 'fall-2026',
     label: 'Fall 2026',
     status: 'active',
+    theme: 'bape',
     blurb: 'Our current recruitment cycle. Dates below are placeholders until the chapter confirms the schedule.',
     applyBy: 'TBA',
     applyUrl: '#',

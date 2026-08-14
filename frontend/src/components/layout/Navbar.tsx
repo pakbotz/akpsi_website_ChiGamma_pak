@@ -17,13 +17,18 @@ import FullscreenMenu from './FullscreenMenu';
 // ever one nav rendered, one "Menu" button, one place to fix.
 //
 // Rush terms can carry their own theme (see rushTerms.ts) — themed terms
-// (like the mountain/western-styled term) alternate between several dark
-// and light color blocks down the page, not just one hero. Route-based
-// light/dark can't track that many zones, so themed pages instead get a
-// permanent translucent, blurred backdrop behind the nav — that keeps the
-// (always-light) nav text legible over whatever color happens to be
-// scrolling underneath, without needing to know where each zone starts.
-// Every other route is unaffected.
+// alternate between several dark and light color blocks down the page,
+// not just one hero. Route-based light/dark can't track that many zones,
+// so themed pages instead get a permanent translucent, blurred backdrop
+// behind the nav — that keeps the (always-light) nav text legible over
+// whatever color happens to be scrolling underneath, without needing to
+// know where each zone starts. Every other route is unaffected. Each
+// theme gets its own backdrop tint so the nav still feels native to it.
+const THEME_NAV_BACKDROP: Record<string, string> = {
+  arcteryx: 'bg-[#2b1c12]/35 backdrop-blur-md',
+  bape: 'bg-black/40 backdrop-blur-md',
+};
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -31,7 +36,8 @@ export default function Navbar() {
 
   const rushSlug = pathname.startsWith('/rush/') ? pathname.split('/')[2] : undefined;
   const activeTerm = rushSlug ? RUSH_TERMS.find((t) => t.slug === rushSlug) : undefined;
-  const isThemedTerm = activeTerm?.theme === 'arcteryx';
+  const themeBackdrop = activeTerm?.theme ? THEME_NAV_BACKDROP[activeTerm.theme] : undefined;
+  const isThemedTerm = Boolean(themeBackdrop);
 
   const isDark = isThemedTerm || pathname === '/' || isBrothersPage;
 
@@ -39,7 +45,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 py-6 sm:px-8 ${
-          isThemedTerm ? 'bg-[#2b1c12]/35 backdrop-blur-md' : isDark ? '' : 'mix-blend-multiply'
+          themeBackdrop ?? (isDark ? '' : 'mix-blend-multiply')
         }`}
       >
         {/* Logo */}

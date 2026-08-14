@@ -3,15 +3,17 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
-import { RUSH_TERMS } from '@/lib/rushTerms';
 
 // ─── Nav links config ──────────────────────────────────────────────
+// Rush is a single destination for now (points straight at the current
+// term page, no term picker) — see rush/page.tsx and rush/[term]/page.tsx
+// for how to bring the multi-term dropdown back later.
 const NAV_LINKS = [
   { label: 'About', href: '/about', num: '01' },
   { label: 'Brothers', href: '/brothers', num: '02', hasSubmenu: true },
   { label: 'Careers', href: '/careers', num: '03' },
   { label: 'Gallery', href: '/gallery', num: '04' },
-  { label: 'Rush AKΨ', href: '/rush', num: '05', hasSubmenu: true },
+  { label: 'Rush AKΨ', href: '/rush/fall-2026', num: '05' },
 ];
 
 const BROTHERS_LINKS = [
@@ -19,15 +21,9 @@ const BROTHERS_LINKS = [
   { label: 'Alumni Spotlights', href: '/brothers/alumni' },
 ];
 
-const RUSH_LINKS = RUSH_TERMS.map((term) => ({
-  label: term.label,
-  href: `/rush/${term.slug}`,
-}));
-
 // Maps a NAV_LINKS label (for entries with hasSubmenu) to its sub-panel list.
 const SUBMENUS: Record<string, { label: string; href: string }[]> = {
   Brothers: BROTHERS_LINKS,
-  'Rush AKΨ': RUSH_LINKS,
 };
 
 // ─── Framer Motion variants ────────────────────────────────────────
