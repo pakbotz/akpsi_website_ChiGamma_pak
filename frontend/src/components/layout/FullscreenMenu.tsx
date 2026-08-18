@@ -5,18 +5,26 @@ import Link from 'next/link';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
 // ─── Nav links config ──────────────────────────────────────────────
+// Rush is a single destination for now (points straight at the current
+// term page, no term picker) — see rush/page.tsx and rush/[term]/page.tsx
+// for how to bring the multi-term dropdown back later.
 const NAV_LINKS = [
   { label: 'About', href: '/about', num: '01' },
   { label: 'Brothers', href: '/brothers', num: '02', hasSubmenu: true },
   { label: 'Careers', href: '/careers', num: '03' },
   { label: 'Gallery', href: '/gallery', num: '04' },
-  { label: 'Rush AKΨ', href: '/rush', num: '05' },
+  { label: 'Rush AKΨ', href: '/rush/fall-2026', num: '05' },
 ];
 
 const BROTHERS_LINKS = [
   { label: 'All Brothers', href: '/brothers' },
   { label: 'Alumni Spotlights', href: '/brothers/alumni' },
 ];
+
+// Maps a NAV_LINKS label (for entries with hasSubmenu) to its sub-panel list.
+const SUBMENUS: Record<string, { label: string; href: string }[]> = {
+  Brothers: BROTHERS_LINKS,
+};
 
 // ─── Framer Motion variants ────────────────────────────────────────
 const overlayVariants: Variants = {
@@ -56,8 +64,9 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [submenuOpenFor, setSubmenuOpenFor] = useState<number | null>(null);
 
-  const brothersIndex = NAV_LINKS.findIndex((l) => l.hasSubmenu);
-  const showSubmenu = submenuOpenFor === brothersIndex;
+  const activeSubmenuLinks =
+    submenuOpenFor !== null ? SUBMENUS[NAV_LINKS[submenuOpenFor].label] : undefined;
+  const showSubmenu = Boolean(activeSubmenuLinks);
 
   return (
     <motion.div
@@ -132,19 +141,21 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
           })}
         </motion.nav>
 
-        {/* Brothers sub-panel — scrollable list of related pages, fades in
-            beside the main nav exactly like Motto's "LEARN" hover panel. */}
+        {/* Sub-panel — scrollable list of related pages (Brothers, Rush
+            terms), fades in beside the main nav exactly like Motto's
+            "LEARN" hover panel. Content swaps based on which nav item
+            with hasSubmenu is currently hovered. */}
         <AnimatePresence>
-          {showSubmenu && (
+          {showSubmenu && submenuOpenFor !== null && (
             <motion.div
-              key="brothers-submenu"
+              key={NAV_LINKS[submenuOpenFor].label}
               variants={subListVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
               onMouseEnter={() => {
-                setHoveredIndex(brothersIndex);
-                setSubmenuOpenFor(brothersIndex);
+                setHoveredIndex(submenuOpenFor);
+                setSubmenuOpenFor(submenuOpenFor);
               }}
               onMouseLeave={() => {
                 setHoveredIndex(null);
@@ -152,7 +163,7 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
               }}
               className="ml-6 hidden max-h-[70vh] flex-col gap-3 overflow-y-auto pr-4 [scrollbar-width:thin] md:ml-10 md:flex lg:ml-16"
             >
-              {BROTHERS_LINKS.map((sub) => (
+              {activeSubmenuLinks!.map((sub) => (
                 <motion.div key={sub.href} variants={subItemVariants}>
                   <SubLink href={sub.href} label={sub.label} onClose={onClose} />
                 </motion.div>
