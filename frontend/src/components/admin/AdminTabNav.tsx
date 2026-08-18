@@ -29,7 +29,7 @@ export default function AdminTabNav() {
           tab starts clear of the logo at any screen width. Adjust the vw
           number below if it still feels off on your monitor.
         */}
-        <nav className="ml-[20vw] flex flex-wrap gap-x-6 items-stretch">
+        <nav className="ml-[10vw] flex flex-wrap gap-x-6 items-stretch">
           {TABS.map((tab) => {
             // startsWith (not ===) so /admin/brothers/<id> still highlights
             // the Brothers tab instead of showing no active tab at all.

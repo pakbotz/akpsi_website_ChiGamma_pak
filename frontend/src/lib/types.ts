@@ -14,15 +14,19 @@ export type Brother = {
   name: string;
   grade: string | null;
   major: string | null;
+  minor: string | null;
   class_id: string | null;
   position_title: string | null;
+  past_positions: string[] | null;
   is_executive: boolean;
   is_board: boolean;
   active: boolean;
   linkedin_url: string | null;
+  email: string | null;
   bio: string | null;
   cloudinary_public_id: string | null;
   sort_order: number;
+  grad_year : number | null;
 };
 
 export type CareerBrother = {
@@ -62,4 +66,5 @@ export type RushCarouselSlide = {
   caption: string;
   location: string | null;
   event_datetime: string | null;
+ instagram_post_url: string | null;
 };

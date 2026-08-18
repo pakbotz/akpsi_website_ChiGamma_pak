@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { CldImage } from 'next-cloudinary';
 import { Brother } from '@/lib/brothers';
 import { toGreekLetter } from '@/lib/greekAlphabet';
+
 
 function LinkedinIcon({ size = 15 }: { size?: number }) {
   return (
@@ -19,6 +21,21 @@ function LinkedinIcon({ size = 15 }: { size?: number }) {
   );
 }
 
+function EmailIcon({ size = 15 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+    </svg>
+  );
+}
+
+
 export default function BrotherModal({
   brother,
   onClose,
@@ -26,6 +43,16 @@ export default function BrotherModal({
   brother: Brother;
   onClose: () => void;
 }) {
+
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  async function handleCopyEmail() {
+    if (!brother.email) return;
+    await navigator.clipboard.writeText(brother.email);
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 1500);
+  }
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -60,20 +87,36 @@ export default function BrotherModal({
         </button>
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[280px_1fr]">
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#1c1c1c]">
-            {brother.photoUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={brother.photoUrl}
-                alt={brother.name}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center">
-                <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
-                  Placeholder Photo
-                </span>
-              </div>
+          <div>
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#1c1c1c]">
+              {brother.cloudinaryPublicId ? (
+                <CldImage
+                  src={brother.cloudinaryPublicId}
+                  alt={brother.name}
+                  fill
+                  crop="fill"
+                  loading="lazy"
+                  gravity="auto"
+                  sizes="(max-width: 768px) 50vw,
+                  (max-width: 1200px) 25vw,
+                  200px"
+                  format="auto"
+                  quality="auto"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center">
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
+                    Placeholder Photo
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {brother.pastPositions.length > 0 && (
+               <p className="mt-3 text-center text-[0.9rem] text-white/40">
+                Past Positions: {brother.pastPositions.join(' · ')}
+                </p>
             )}
           </div>
 
@@ -89,7 +132,7 @@ export default function BrotherModal({
 
             <p className="mt-1 text-sm text-white/55">
               {brother.major}
-              {brother.minor ? ` · ${brother.minor}` : ''}
+              {brother.minor ? ` · ${brother.minor}` + ' Minor' : ''}
             </p>
 
             <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -102,6 +145,16 @@ export default function BrotherModal({
                 <LinkedinIcon />
                 LinkedIn
               </a>
+              {brother.email && (
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="flex items-center gap-2 border border-white/25 px-4 py-2 text-sm text-white/80 transition-colors hover:border-[#c8b89a] hover:text-[#c8b89a]"
+                >
+                  <EmailIcon />
+                  {emailCopied ? 'Copied!' : 'Email'}
+                </button>
+              )}
             </div>
 
             <div
@@ -120,18 +173,18 @@ export default function BrotherModal({
                 </div>
               )}
               <div className="text-center">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/40">
-                  Class
+                <p className="text-xs py-2 uppercase tracking-[0.2em] text-white/40">
+                  Year
                 </p>
                 <p className="mt-1 text-sm text-white/85">
-                  {brother.year}
+                  {brother.currentYear ?? '—'}
                 </p>
               </div>
               <div className="text-center">
                 <p className="text-xs uppercase tracking-[0.2em] text-white/40">
                   Pledge Class
                 </p>
-                <p className="mt-1 text-sm text-[#c8b89a]" title={brother.pledgeClass}>
+                <p className="mt-1 font-['Palatino_Linotype'] text-sm text-[#c8b89a]" title={brother.pledgeClass}>
                   {toGreekLetter(brother.pledgeClass)}
                 </p>
               </div>
