@@ -7,27 +7,100 @@ import { Plus, Search } from 'lucide-react';
 const FAQS = [
   {
     q: 'What distinguishes us from other organizations?',
-    a: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    a: (
+      <>
+        What sets Alpha Kappa Psi apart is our commitment to{' '}
+        <strong>professional growth without limiting who can be part of it</strong>
+        . We welcome students from every major and every stage of their college
+        journey, providing opportunities to build meaningful connections, develop
+        career-ready skills, and discover new possibilities. Whether you're just
+        beginning to explore your interests or already have a clear career path in
+        mind, <strong>we're here to help you grow and make the most of your time at UCSC.</strong>
+      </>
+    ),
   },
   {
     q: 'Is it necessary to be a business major to join?',
-    a: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    a: (
+      <>
+        Not at all. Alpha Kappa Psi is a{' '}
+        <strong>co-ed professional fraternity open to students of all majors</strong>
+        . Our chapter brings together people from a wide range of academic
+        backgrounds, including Computer Science, Engineering, Psychology, Design,
+        Mathematics, and beyond. We believe that some of the strongest professional
+        communities are built by bringing together people with{' '}
+        <strong>different perspectives, experiences, and areas of expertise.</strong>
+      </>
+    ),
   },
   {
     q: 'What is the Prospecting Process?',
-    a: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    a: (
+      <>
+        The Prospecting Process is a{' '}
+        <strong>6-week professional development experience</strong> designed to
+        help students grow both personally and professionally while getting to know
+        our chapter and its values. Throughout the process, prospects have
+        opportunities to develop career-ready skills, build meaningful relationships,
+        and gain a deeper understanding of what Alpha Kappa Psi has to offer. By the
+        end of the six weeks, our goal is for every prospect to walk away with{' '}
+        <strong>new skills, stronger connections, and greater confidence in their professional journey.</strong>
+      </>
+    ),
   },
   {
     q: 'How many prospects are accepted each semester?',
-    a: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    a: (
+      <>
+        There is <strong>no predetermined number of prospects</strong> accepted each
+        semester. The size of each Prospecting Process depends on the level of
+        interest and participation during recruitment. Our focus is on creating a
+        meaningful experience for everyone involved rather than setting an arbitrary
+        limit.
+      </>
+    ),
   },
   {
     q: 'Is attendance at Rush Events obligatory for applying?',
-    a: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.',
+    a: (
+      <>
+        Attending <strong>3/4 rush events is required to apply</strong>, and we
+        highly encourage prospective members to attend as many as they can. Rush is
+        an opportunity for you to{' '}
+        <strong>get to know our members, experience our chapter culture, and learn what Alpha Kappa Psi can offer you</strong>
+        . At the same time, it gives our members the chance to get to know you beyond
+        your résumé or academic background.
+      </>
+    ),
   },
   {
     q: 'What is the time commitment once initiated?',
-    a: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.',
+    a: (
+      <>
+        Alpha Kappa Psi is a commitment to{' '}
+        <strong>your own professional and personal growth</strong>. The time you put
+        into the organization directly influences what you get out of the experience,
+        from professional development and networking to friendships and leadership
+        opportunities. In terms of overall time and effort, the commitment is often{' '}
+        <strong>comparable to taking a 5 unit course</strong>, with opportunities
+        to become even more involved as you progress through the chapter.
+      </>
+    ),
+  },
+  {
+    q: "Can I rush again if I don't get a bid the first time?",
+    a: (
+      <>
+        Absolutely. Not receiving a bid one quarter does{' '}
+        <strong>not prevent you from rushing again in future quarters</strong>. We
+        encourage anyone who remains interested in Alpha Kappa Psi to come back,
+        reconnect with our chapter, and continue pursuing membership.{' '}
+        <strong>
+          Showing that you're willing to grow, learn, and try again is something we
+          genuinely value.
+        </strong>
+      </>
+    ),
   },
 ];
 
@@ -65,6 +138,7 @@ export default function FAQSection() {
         <div>
           {filtered.map((item, i) => {
             const isOpen = openIndex === i;
+
             return (
               <div key={item.q} className="border-b border-white/10">
                 <button
@@ -75,6 +149,7 @@ export default function FAQSection() {
                   <span className="text-base text-white sm:text-lg">
                     {item.q}
                   </span>
+
                   <motion.span
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.25 }}
@@ -90,10 +165,13 @@ export default function FAQSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{
+                        duration: 0.3,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
                       className="overflow-hidden"
                     >
-                      <p className="max-w-2xl pb-6 text-sm leading-relaxed text-white/50 sm:text-base">
+                      <p className="w-full max-w-none pb-8 pr-12 text-sm leading-relaxed text-white/50 sm:text-base">
                         {item.a}
                       </p>
                     </motion.div>
