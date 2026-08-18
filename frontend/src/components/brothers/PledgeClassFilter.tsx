@@ -16,7 +16,7 @@ export default function PledgeClassFilter({
 }) {
   return (
     <FilterDropdown
-      label="Pledge Class"
+      label="Class"
       options={[ALL_CLASSES, ...options]}
       selected={selected}
       onChange={onChange}
