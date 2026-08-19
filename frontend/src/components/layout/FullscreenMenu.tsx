@@ -3,16 +3,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { SubOrganization } from '@/lib/types';
 
 // ─── Nav links config ──────────────────────────────────────────────
-const NAV_LINKS = [
-  { label: 'About', href: '/about', num: '01' },
-  { label: 'Brothers', href: '/brothers', num: '02', hasSubmenu: true },
-  { label: 'Careers', href: '/careers', num: '03' },
-  { label: 'Gallery', href: '/gallery', num: '04' },
-  { label: 'Rush AKΨ', href: '/rush', num: '05' },
-];
-
+// Any entry with a `submenu` array gets a hover flyout, generalized so
+// more than one nav item can carry one (see `showSubmenu` below, which
+// is keyed off whichever index is currently hovered rather than a
+// single fixed item).
 const BROTHERS_LINKS = [
   { label: 'All Brothers', href: '/brothers' },
   { label: 'Alumni Spotlights', href: '/brothers/alumni' },
@@ -52,12 +49,33 @@ const subItemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
+export default function FullscreenMenu({
+  subOrganizations,
+  onClose,
+}: {
+  subOrganizations: SubOrganization[];
+  onClose: () => void;
+}) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [submenuOpenFor, setSubmenuOpenFor] = useState<number | null>(null);
 
-  const brothersIndex = NAV_LINKS.findIndex((l) => l.hasSubmenu);
-  const showSubmenu = submenuOpenFor === brothersIndex;
+  const subOrgLinks = subOrganizations.map((org) => ({
+    label: org.name,
+    href: `/sub-organizations/${org.slug}`,
+  }));
+
+  const NAV_LINKS = [
+    { label: 'About', href: '/about', num: '01' },
+    { label: 'Brothers', href: '/brothers', num: '02', submenu: BROTHERS_LINKS },
+    { label: 'Sub-Organizations', href: '/sub-organizations', num: '03', submenu: subOrgLinks },
+    { label: 'Careers', href: '/careers', num: '04' },
+    { label: 'Gallery', href: '/gallery', num: '05' },
+    { label: 'Rush AKΨ', href: '/rush', num: '06' },
+  ];
+
+  const activeSubmenu =
+    submenuOpenFor !== null ? NAV_LINKS[submenuOpenFor].submenu : undefined;
+  const showSubmenu = !!activeSubmenu;
 
   return (
     <motion.div
@@ -101,7 +119,7 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
                   onClick={onClose}
                   onMouseEnter={() => {
                     setHoveredIndex(i);
-                    if (link.hasSubmenu) setSubmenuOpenFor(i);
+                    if (link.submenu) setSubmenuOpenFor(i);
                     else setSubmenuOpenFor(null);
                   }}
                   onMouseLeave={() => setHoveredIndex(null)}
@@ -132,27 +150,25 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
           })}
         </motion.nav>
 
-        {/* Brothers sub-panel — scrollable list of related pages, fades in
-            beside the main nav exactly like Motto's "LEARN" hover panel. */}
+        {/* Sub-panel — scrollable list of related pages, fades in beside the
+            main nav. Generalized: whichever nav item is hovered supplies its
+            own `submenu` array (Brothers, Sub-Organizations, ...). */}
         <AnimatePresence>
           {showSubmenu && (
             <motion.div
-              key="brothers-submenu"
+              key={`submenu-${submenuOpenFor}`}
               variants={subListVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              onMouseEnter={() => {
-                setHoveredIndex(brothersIndex);
-                setSubmenuOpenFor(brothersIndex);
-              }}
+              onMouseEnter={() => setHoveredIndex(submenuOpenFor)}
               onMouseLeave={() => {
                 setHoveredIndex(null);
                 setSubmenuOpenFor(null);
               }}
               className="ml-6 hidden max-h-[70vh] flex-col gap-3 overflow-y-auto pr-4 [scrollbar-width:thin] md:ml-10 md:flex lg:ml-16"
             >
-              {BROTHERS_LINKS.map((sub) => (
+              {activeSubmenu!.map((sub) => (
                 <motion.div key={sub.href} variants={subItemVariants}>
                   <SubLink href={sub.href} label={sub.label} onClose={onClose} />
                 </motion.div>

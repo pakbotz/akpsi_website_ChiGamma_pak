@@ -5,20 +5,27 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 import { Menu } from 'lucide-react';
+import { SubOrganization } from '@/lib/types';
 import FullscreenMenu from './FullscreenMenu';
 
 // ─── Main Navbar ───────────────────────────────────────────────────
-// Single navbar for the whole site. The home page ("/") and the Brothers
-// directory ("/brothers" and its sub-routes) are dark-themed (black
+// Single navbar for the whole site. The home page ("/"), the Brothers
+// directory ("/brothers" and its sub-routes), and the sub-organizations
+// pages ("/sub-organizations" and its sub-routes) are dark-themed (black
 // background, cream text) while every other page so far is light-themed
 // (off-white background, near-black text) — this component reads the
 // current route and switches its own colors accordingly, so there's only
 // ever one nav rendered, one "Menu" button, one place to fix.
-export default function Navbar() {
+export default function Navbar({
+  subOrganizations,
+}: {
+  subOrganizations: SubOrganization[];
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const isBrothersPage = pathname.startsWith('/brothers');
-  const isDark = pathname === '/' || isBrothersPage;
+  const isSubOrgsPage = pathname.startsWith('/sub-organizations');
+  const isDark = pathname === '/' || isBrothersPage || isSubOrgsPage;
 
   return (
     <>
@@ -63,7 +70,12 @@ export default function Navbar() {
 
       {/* Fullscreen overlay */}
       <AnimatePresence>
-        {menuOpen && <FullscreenMenu onClose={() => setMenuOpen(false)} />}
+        {menuOpen && (
+          <FullscreenMenu
+            subOrganizations={subOrganizations}
+            onClose={() => setMenuOpen(false)}
+          />
+        )}
       </AnimatePresence>
     </>
   );
