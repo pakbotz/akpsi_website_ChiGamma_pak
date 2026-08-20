@@ -165,8 +165,8 @@ function AlumniCard({ a }: { a: Alumnus }) {
 /* --- Value card: lifts, border + icon brighten on hover --- */
 function ValueCard({ v, delay }: { v: Value; delay: number }) {
   return (
-    <Reveal delay={delay}>
-      <div className="group h-full rounded-xl border border-white/10 bg-white/[0.02] p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/25 hover:bg-white/[0.05]">
+    <Reveal delay={delay} className="h-full">
+      <div className="group flex h-full flex-col rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/25 hover:bg-white/[0.05]">
         <div className="transition-transform duration-500 ease-out group-hover:-translate-y-1">
           <Icon name={v.icon} />
         </div>
@@ -386,19 +386,19 @@ export default function AboutPage() {
       </Container>
 
       <div className="border-t border-white/10">
-        <Container>
+        <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
           <section className="py-24 sm:py-32">
             <Reveal className="text-center">
               <Eyebrow>What We Stand For</Eyebrow>
               <h2 className="mt-4 text-3xl font-bold uppercase tracking-wide sm:text-4xl">Our Core Values</h2>
             </Reveal>
-            <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
               {VALUES.map((v, i) => (
                 <ValueCard key={v.title} v={v} delay={i * 0.08} />
               ))}
             </div>
           </section>
-        </Container>
+        </div>
       </div>
     </div>
   );
