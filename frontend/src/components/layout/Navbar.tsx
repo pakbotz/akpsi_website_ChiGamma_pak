@@ -39,7 +39,7 @@ export default function Navbar() {
   const themeBackdrop = activeTerm?.theme ? THEME_NAV_BACKDROP[activeTerm.theme] : undefined;
   const isThemedTerm = Boolean(themeBackdrop);
 
-  const isDark = isThemedTerm || pathname === '/' || isBrothersPage;
+  const isDark = isThemedTerm || pathname === '/' || pathname === '/about' || isBrothersPage;
 
   return (
     <>
