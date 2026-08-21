@@ -9,9 +9,9 @@ import { RUSH_TERMS } from '@/lib/rushTerms';
 import FullscreenMenu from './FullscreenMenu';
 
 // ─── Main Navbar ───────────────────────────────────────────────────
-// Single navbar for the whole site. The home page ("/") and the Brothers
-// directory ("/brothers" and its sub-routes) are dark-themed (black
-// background, cream text) while every other page so far is light-themed
+// Single navbar for the whole site. The home page ("/"), the Brothers
+// directory ("/brothers"), and the Gallery ("/gallery") are dark-themed
+// (black background, cream text) while every other page so far is light-themed
 // (off-white background, near-black text) — this component reads the
 // current route and switches its own colors accordingly, so there's only
 // ever one nav rendered, one "Menu" button, one place to fix.
@@ -33,13 +33,14 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const isBrothersPage = pathname.startsWith('/brothers');
+  const isGalleryPage = pathname.startsWith('/gallery');
 
   const rushSlug = pathname.startsWith('/rush/') ? pathname.split('/')[2] : undefined;
   const activeTerm = rushSlug ? RUSH_TERMS.find((t) => t.slug === rushSlug) : undefined;
   const themeBackdrop = activeTerm?.theme ? THEME_NAV_BACKDROP[activeTerm.theme] : undefined;
   const isThemedTerm = Boolean(themeBackdrop);
 
-  const isDark = isThemedTerm || pathname === '/' || isBrothersPage;
+  const isDark = isThemedTerm || pathname === '/' || isBrothersPage || isGalleryPage;
 
   return (
     <>

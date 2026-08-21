@@ -28,9 +28,9 @@ export default function GalleryGrid() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-40px' }}
-          className="flex aspect-square w-full items-center justify-center bg-neutral-200"
+          className="flex aspect-square w-full items-center justify-center bg-[#1c1c1c]"
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
             Placeholder Photo
           </span>
         </motion.div>
