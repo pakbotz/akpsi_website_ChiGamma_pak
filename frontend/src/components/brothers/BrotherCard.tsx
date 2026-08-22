@@ -53,7 +53,7 @@ export default function BrotherCard({
           </span>
         </div>
 
-        <p className="mt-1 text-sm text-white/55">
+        <p className="mt-1 line-clamp-2 min-h-[2.5em] text-sm text-white/55">
           {brother.major}
           {brother.minor ? ` · ${brother.minor}` + ' Minor': ''}
         </p>
@@ -62,11 +62,9 @@ export default function BrotherCard({
           {brother.currentYear ?? '—'}
         </p>
 
-        {brother.positions.length > 0 && (
-          <p className="mt-2 text-xs uppercase tracking-[0.1em] text-white/40">
-            {brother.positions.join(' · ')}
-          </p>
-        )}
+        <p className="mt-2 min-h-[1em] text-xs uppercase tracking-[0.1em] text-white/40">
+          {brother.positions.length > 0 ? brother.positions.join(' · ') : ' '}
+        </p>
       </div>
     </button>
   );

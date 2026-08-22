@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { CldImage } from 'next-cloudinary';
 import { Brother } from '@/lib/brothers';
-import { toGreekLetter } from '@/lib/greekAlphabet';
 
 
 function LinkedinIcon({ size = 15 }: { size?: number }) {
@@ -182,10 +181,10 @@ export default function BrotherModal({
               </div>
               <div className="text-center">
                 <p className="text-xs uppercase tracking-[0.2em] text-white/40">
-                  Pledge Class
+                  Class
                 </p>
-                <p className="mt-1 font-['Palatino_Linotype'] text-sm text-[#c8b89a]" title={brother.pledgeClass}>
-                  {toGreekLetter(brother.pledgeClass)}
+                <p className="mt-1 font-['Palatino_Linotype'] text-sm text-[#c8b89a]">
+                  {brother.pledgeClass}
                 </p>
               </div>
             </div>
