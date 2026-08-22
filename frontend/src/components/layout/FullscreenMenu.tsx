@@ -67,10 +67,9 @@ export default function FullscreenMenu({
   const NAV_LINKS = [
     { label: 'About', href: '/about', num: '01' },
     { label: 'Brothers', href: '/brothers', num: '02', submenu: BROTHERS_LINKS },
-    { label: 'Sub-Organizations', href: '/sub-organizations', num: '03', submenu: subOrgLinks },
-    { label: 'Careers', href: '/careers', num: '04' },
-    { label: 'Gallery', href: '/gallery', num: '05' },
-    { label: 'Rush AKΨ', href: '/rush', num: '06' },
+    { label: 'Careers', href: '/careers', num: '03', submenu: subOrgLinks },
+    { label: 'Gallery', href: '/gallery', num: '04' },
+    { label: 'Rush AKΨ', href: '/rush', num: '05' },
   ];
 
   const activeSubmenu =
