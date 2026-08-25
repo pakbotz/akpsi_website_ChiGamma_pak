@@ -54,14 +54,14 @@ export default function GalleryCarousel() {
         <div className="flex gap-4 sm:gap-6">
           {EVENTS.map((slide, i) => (
             <div key={i} className="min-w-0 shrink-0 basis-[85%] sm:basis-[60%] lg:basis-[46%]">
-              <div className="aspect-video w-full bg-neutral-200">
+              <div className="aspect-video w-full bg-[#1c1c1c]">
                 <div className="flex h-full w-full items-center justify-center">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400">
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
                     Placeholder Photo
                   </span>
                 </div>
               </div>
-              <p className="mt-4 text-sm uppercase tracking-[0.15em] text-neutral-500">
+              <p className="mt-4 text-sm uppercase tracking-[0.15em] text-white/50">
                 {slide.caption}
               </p>
             </div>
@@ -75,7 +75,7 @@ export default function GalleryCarousel() {
             onClick={scrollPrev}
             disabled={!canScrollPrev}
             aria-label="Previous"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300 text-neutral-500 transition-colors hover:border-[#1e3a5f] hover:text-[#1e3a5f] disabled:opacity-30 disabled:hover:border-neutral-300 disabled:hover:text-neutral-500"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/50 transition-colors hover:border-[#c8b89a] hover:text-[#c8b89a] disabled:opacity-30 disabled:hover:border-white/15 disabled:hover:text-white/50"
           >
             <ArrowLeft size={16} />
           </button>
@@ -83,7 +83,7 @@ export default function GalleryCarousel() {
             onClick={scrollNext}
             disabled={!canScrollNext}
             aria-label="Next"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300 text-neutral-500 transition-colors hover:border-[#1e3a5f] hover:text-[#1e3a5f] disabled:opacity-30 disabled:hover:border-neutral-300 disabled:hover:text-neutral-500"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/50 transition-colors hover:border-[#c8b89a] hover:text-[#c8b89a] disabled:opacity-30 disabled:hover:border-white/15 disabled:hover:text-white/50"
           >
             <ArrowRight size={16} />
           </button>
@@ -96,7 +96,7 @@ export default function GalleryCarousel() {
               className="h-1.5 rounded-full transition-all"
               style={{
                 width: i === selectedIndex ? 24 : 6,
-                backgroundColor: i === selectedIndex ? '#c8b89a' : '#d4d4d4',
+                backgroundColor: i === selectedIndex ? '#c8b89a' : '#3a3a3a',
               }}
             />
           ))}
