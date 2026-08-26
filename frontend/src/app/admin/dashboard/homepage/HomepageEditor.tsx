@@ -79,7 +79,7 @@ export default function HomepageEditor({
 
   async function saveSlideField(
     id: string,
-    field: 'caption' | 'location' | 'event_datetime',
+    field: 'caption' | 'location' | 'event_datetime' | 'instagram_post_url',
     value: string
   ) {
     setSavingKey(`slide:${id}:${field}`);
@@ -207,6 +207,18 @@ export default function HomepageEditor({
                   onCommit={(value) => saveSlideField(slide.id, 'event_datetime', value)}
                   placeholder="e.g. Nov 4, 7:00 PM"
                   saving={savingKey === `slide:${slide.id}:event_datetime`}
+                />
+                <EditableField
+                  label="Instagram post link (optional)"
+                  value={slide.instagram_post_url ?? ''}
+                  onChange={(value) =>
+                    setSlides((prev) =>
+                      prev.map((s) => (s.id === slide.id ? { ...s, instagram_post_url: value } : s))
+                    )
+                  }
+                  onCommit={(value) => saveSlideField(slide.id, 'instagram_post_url', value)}
+                  placeholder="https://www.instagram.com/p/..."
+                  saving={savingKey === `slide:${slide.id}:instagram_post_url`}
                 />
               </div>
             </ImageUploadCard>

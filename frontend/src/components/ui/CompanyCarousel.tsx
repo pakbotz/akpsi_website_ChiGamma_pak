@@ -14,7 +14,9 @@ function LogoRow({ logos, ariaHidden = false }: { logos: Logo[]; ariaHidden?: bo
             src={logo.cloudinaryPublicId}
             alt="Company logo"
             fill
+            sizes="150px"
             crop="fit"
+            loading="lazy"
             className="object-contain opacity-40 grayscale transition-all duration-300 hover:opacity-80 hover:grayscale-0"
           />
         </div>
