@@ -6,41 +6,21 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { SubOrganization } from '@/lib/types';
 
 // ─── Nav links config ──────────────────────────────────────────────
-<<<<<<< HEAD
-// Any entry with a `submenu` array gets a hover flyout, generalized so
-// more than one nav item can carry one (see `showSubmenu` below, which
-// is keyed off whichever index is currently hovered rather than a
-// single fixed item).
-=======
 // Rush is a single destination for now (points straight at the current
 // term page, no term picker) — see rush/page.tsx and rush/[term]/page.tsx
 // for how to bring the multi-term dropdown back later.
 const NAV_LINKS = [
   { label: 'About', href: '/about', num: '01' },
   { label: 'Brothers', href: '/brothers', num: '02', hasSubmenu: false },
-  { label: 'Careers', href: '/careers', num: '03', hasSubmenu: true},
+  { label: 'Careers', href: '/careers', num: '03', hasSubmenu: true },
   { label: 'Gallery', href: '/gallery', num: '04' },
   { label: 'Rush AKΨ', href: '/rush/fall-2026', num: '05' },
 ];
 
->>>>>>> main
 const BROTHERS_LINKS = [
   { label: 'All Brothers', href: '/brothers' },
   { label: 'Intern Spotlight', href: '/brothers/alumni' },
 ];
-
-const CAREERS_LINKS = [
-  { label: 'Our Careers', href: '/careers' },
-  { label: 'Alumni Spotlight', href: '/careers/alumni' },
-  { label: 'Sub-Organizations', href: '/careers/suborgs' },
-];
-
-
-// Maps a NAV_LINKS label (for entries with hasSubmenu) to its sub-panel list.
-const SUBMENUS: Record<string, { label: string; href: string }[]> = {
-  Brothers: BROTHERS_LINKS,
-  Careers: CAREERS_LINKS,
-};
 
 // ─── Framer Motion variants ────────────────────────────────────────
 const overlayVariants: Variants = {
@@ -86,28 +66,26 @@ export default function FullscreenMenu({
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [submenuOpenFor, setSubmenuOpenFor] = useState<number | null>(null);
 
-<<<<<<< HEAD
-  const subOrgLinks = subOrganizations.map((org) => ({
-    label: org.name,
-    href: `/sub-organizations/${org.slug}`,
-  }));
-
-  const NAV_LINKS = [
-    { label: 'About', href: '/about', num: '01' },
-    { label: 'Brothers', href: '/brothers', num: '02', submenu: BROTHERS_LINKS },
-    { label: 'Careers', href: '/careers', num: '03', submenu: subOrgLinks },
-    { label: 'Gallery', href: '/gallery', num: '04' },
-    { label: 'Rush AKΨ', href: '/rush', num: '05' },
+  const careersLinks = [
+    { label: 'Our Careers', href: '/careers' },
+    { label: 'Alumni Spotlight', href: '/careers/alumni' },
+    ...subOrganizations.map((org) => ({
+      label: org.name,
+      href: `/sub-organizations/${org.slug}`,
+    })),
   ];
 
-  const activeSubmenu =
-    submenuOpenFor !== null ? NAV_LINKS[submenuOpenFor].submenu : undefined;
-  const showSubmenu = !!activeSubmenu;
-=======
+  // Maps a NAV_LINKS label (for entries with hasSubmenu) to its sub-panel
+  // list. Careers' list is built above since it depends on the live
+  // Supabase-backed sub-organizations.
+  const SUBMENUS: Record<string, { label: string; href: string }[]> = {
+    Brothers: BROTHERS_LINKS,
+    Careers: careersLinks,
+  };
+
   const activeSubmenuLinks =
     submenuOpenFor !== null ? SUBMENUS[NAV_LINKS[submenuOpenFor].label] : undefined;
   const showSubmenu = Boolean(activeSubmenuLinks);
->>>>>>> main
 
   return (
     <motion.div
@@ -151,7 +129,7 @@ export default function FullscreenMenu({
                   onClick={onClose}
                   onMouseEnter={() => {
                     setHoveredIndex(i);
-                    if (link.submenu) setSubmenuOpenFor(i);
+                    if (link.hasSubmenu) setSubmenuOpenFor(i);
                     else setSubmenuOpenFor(null);
                   }}
                   onMouseLeave={() => setHoveredIndex(null)}
@@ -182,47 +160,29 @@ export default function FullscreenMenu({
           })}
         </motion.nav>
 
-<<<<<<< HEAD
-        {/* Sub-panel — scrollable list of related pages, fades in beside the
-            main nav. Generalized: whichever nav item is hovered supplies its
-            own `submenu` array (Brothers, Sub-Organizations, ...). */}
-        <AnimatePresence>
-          {showSubmenu && (
-            <motion.div
-              key={`submenu-${submenuOpenFor}`}
-=======
-        {/* Sub-panel — list of related pages (Brothers, Rush
-            terms), fades in beside the main nav exactly like Motto's
-            "LEARN" hover panel. Content swaps based on which nav item
-            with hasSubmenu is currently hovered. */}
+        {/* Sub-panel — list of related pages (Brothers, Careers'
+            sub-organizations), fades in beside the main nav exactly like
+            Motto's "LEARN" hover panel. Content swaps based on which nav
+            item with hasSubmenu is currently hovered. */}
         <AnimatePresence mode="wait">
           {showSubmenu && submenuOpenFor !== null && (
             <motion.div
               key={NAV_LINKS[submenuOpenFor].label}
->>>>>>> main
               variants={subListVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-<<<<<<< HEAD
-              onMouseEnter={() => setHoveredIndex(submenuOpenFor)}
-=======
               onMouseEnter={() => {
                 setHoveredIndex(submenuOpenFor);
                 setSubmenuOpenFor(submenuOpenFor);
               }}
->>>>>>> main
               onMouseLeave={() => {
                 setHoveredIndex(null);
                 setSubmenuOpenFor(null);
               }}
               className="ml-6 hidden max-h-[80vh] flex-col gap-3 overflow-y-auto pr-4 md:ml-10 md:flex lg:ml-16"
             >
-<<<<<<< HEAD
-              {activeSubmenu!.map((sub) => (
-=======
               {activeSubmenuLinks!.map((sub) => (
->>>>>>> main
                 <motion.div key={sub.href} variants={subItemVariants}>
                   <SubLink href={sub.href} label={sub.label} onClose={onClose} />
                 </motion.div>

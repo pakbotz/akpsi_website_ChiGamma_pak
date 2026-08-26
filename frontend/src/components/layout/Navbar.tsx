@@ -5,38 +5,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 import { Menu } from 'lucide-react';
-<<<<<<< HEAD
 import { SubOrganization } from '@/lib/types';
-=======
 import { RUSH_TERMS } from '@/lib/rushTerms';
->>>>>>> main
 import FullscreenMenu from './FullscreenMenu';
 
 // ─── Main Navbar ───────────────────────────────────────────────────
 // Single navbar for the whole site. The home page ("/"), the Brothers
-<<<<<<< HEAD
-// directory ("/brothers" and its sub-routes), and the sub-organizations
-// pages ("/sub-organizations" and its sub-routes) are dark-themed (black
-// background, cream text) while every other page so far is light-themed
-// (off-white background, near-black text) — this component reads the
-// current route and switches its own colors accordingly, so there's only
-// ever one nav rendered, one "Menu" button, one place to fix.
-export default function Navbar({
-  subOrganizations,
-}: {
-  subOrganizations: SubOrganization[];
-}) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const isBrothersPage = pathname.startsWith('/brothers');
-  const isSubOrgsPage = pathname.startsWith('/sub-organizations');
-  const isDark = pathname === '/' || isBrothersPage || isSubOrgsPage;
-=======
-// directory ("/brothers"), and the Gallery ("/gallery") are dark-themed
-// (black background, cream text) while every other page so far is light-themed
-// (off-white background, near-black text) — this component reads the
-// current route and switches its own colors accordingly, so there's only
-// ever one nav rendered, one "Menu" button, one place to fix.
+// directory ("/brothers"), the sub-organizations pages
+// ("/sub-organizations" and its sub-routes), and the Gallery ("/gallery")
+// are dark-themed (black background, cream text) while every other page
+// so far is light-themed (off-white background, near-black text) — this
+// component reads the current route and switches its own colors
+// accordingly, so there's only ever one nav rendered, one "Menu" button,
+// one place to fix.
 //
 // Rush terms can carry their own theme (see rushTerms.ts) — themed terms
 // alternate between several dark and light color blocks down the page,
@@ -51,10 +32,15 @@ const THEME_NAV_BACKDROP: Record<string, string> = {
   bape: 'bg-black/40 backdrop-blur-md',
 };
 
-export default function Navbar() {
+export default function Navbar({
+  subOrganizations,
+}: {
+  subOrganizations: SubOrganization[];
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const isBrothersPage = pathname.startsWith('/brothers');
+  const isSubOrgsPage = pathname.startsWith('/sub-organizations');
   const isGalleryPage = pathname.startsWith('/gallery');
   const isCareersPage = pathname.startsWith('/careers');
   const isAboutPage = pathname.startsWith('/about');
@@ -64,8 +50,14 @@ export default function Navbar() {
   const themeBackdrop = activeTerm?.theme ? THEME_NAV_BACKDROP[activeTerm.theme] : undefined;
   const isThemedTerm = Boolean(themeBackdrop);
 
-  const isDark = isThemedTerm || pathname === '/' || isBrothersPage || isGalleryPage || isCareersPage || isAboutPage;
->>>>>>> main
+  const isDark =
+    isThemedTerm ||
+    pathname === '/' ||
+    isBrothersPage ||
+    isSubOrgsPage ||
+    isGalleryPage ||
+    isCareersPage ||
+    isAboutPage;
 
   return (
     <>

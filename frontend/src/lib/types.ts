@@ -78,7 +78,7 @@ export type RushCarouselSlide = {
   caption: string;
   location: string | null;
   event_datetime: string | null;
-<<<<<<< HEAD
+  instagram_post_url: string | null;
 };
 
 export type SubOrganization = {
@@ -117,7 +117,4 @@ export type SubOrgChecklistItem = {
   title: string;
   description: string | null;
   display_order: number;
-=======
- instagram_post_url: string | null;
->>>>>>> main
 };
