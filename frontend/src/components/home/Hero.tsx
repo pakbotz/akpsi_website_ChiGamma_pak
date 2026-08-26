@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from 'framer-motion';
 import { CldImage } from 'next-cloudinary';
+import { getCldVideoUrl } from 'next-cloudinary';
 
 const wordVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -19,15 +20,14 @@ export default function Hero({ backgroundImage }: { backgroundImage: string | nu
     <section className="relative h-screen w-full overflow-hidden bg-[#0a0a0a]">
       <div className="absolute inset-0">
         {backgroundImage && (
-          <CldImage
-            src={backgroundImage}
-            alt="Chi Gamma chapter"
-            fill
-            sizes="100vw"
-            quality="auto"
-            format="auto"
-            className="object-cover opacity-70"
-            preload
+          <video
+            src={getCldVideoUrl({ src: backgroundImage, format: 'mp4', quality: 'auto' })}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover opacity-70"
           />
         )}
         <div

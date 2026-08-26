@@ -34,13 +34,15 @@ export default function Navbar() {
   const pathname = usePathname();
   const isBrothersPage = pathname.startsWith('/brothers');
   const isGalleryPage = pathname.startsWith('/gallery');
+  const isCareersPage = pathname.startsWith('/careers');
+  const isAboutPage = pathname.startsWith('/about');
 
   const rushSlug = pathname.startsWith('/rush/') ? pathname.split('/')[2] : undefined;
   const activeTerm = rushSlug ? RUSH_TERMS.find((t) => t.slug === rushSlug) : undefined;
   const themeBackdrop = activeTerm?.theme ? THEME_NAV_BACKDROP[activeTerm.theme] : undefined;
   const isThemedTerm = Boolean(themeBackdrop);
 
-  const isDark = isThemedTerm || pathname === '/' || isBrothersPage || isGalleryPage;
+  const isDark = isThemedTerm || pathname === '/' || isBrothersPage || isGalleryPage || isCareersPage || isAboutPage;
 
   return (
     <>

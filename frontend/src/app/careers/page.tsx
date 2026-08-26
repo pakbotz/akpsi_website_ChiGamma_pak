@@ -1,9 +1,8 @@
-export default function Page() {
-    return (
-      <div className="flex min-h-screen w-full items-center justify-center bg-[#0a0a0a]">
-        <p className="text-sm uppercase tracking-[0.25em] text-white/50">
-          W.I.P
-        </p>
-      </div>
-    );
-  }
+import CareersRoster from '@/components/careers/CareersRoster';
+import { getCareersByYear } from '@/lib/careers';
+
+export default async function CareersPage() {
+  const { years, alumniByYear } = await getCareersByYear();
+
+  return <CareersRoster years={years} alumniByYear={alumniByYear} />;
+}
