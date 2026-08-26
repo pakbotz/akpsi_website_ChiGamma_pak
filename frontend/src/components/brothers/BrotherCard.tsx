@@ -53,7 +53,7 @@ export default function BrotherCard({
           </span>
         </div>
 
-        <p className="mt-1 line-clamp-2 min-h-[2.5em] text-sm text-white/55">
+        <p className="mt-1 line-clamp-2 min-h-[1.5em] text-sm text-white/55">
           {brother.major}
           {brother.minor ? ` · ${brother.minor}` + ' Minor': ''}
         </p>

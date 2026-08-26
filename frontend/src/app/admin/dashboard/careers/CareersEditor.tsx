@@ -27,12 +27,13 @@ function CareerRow({
 
   return (
     <tr className="border-b border-white/5">
-      {(['name', 'position', 'company', 'sector'] as const).map((field) => (
+      {(['name', 'position', 'company', 'year'] as const).map((field) => (
         <td key={field} className="py-2 pr-4">
           <input
             value={(row[field] as string) ?? ''}
             onChange={(e) => onChange(field, e.target.value)}
             onBlur={(e) => onCommit(field, e.target.value)}
+            placeholder={field === 'year' ? 'e.g. 2024' : undefined}
             className={cellClasses}
           />
           {savingKey === `${row.id}:${field}` && (
@@ -120,7 +121,7 @@ export default function CareersEditor({
                 <th className="py-2 pr-4 font-normal">Name</th>
                 <th className="py-2 pr-4 font-normal">Position</th>
                 <th className="py-2 pr-4 font-normal">Company</th>
-                <th className="py-2 pr-4 font-normal">Sector</th>
+                <th className="py-2 pr-4 font-normal">Year</th>
                 <th className="py-2 pr-4 font-normal" />
               </tr>
             </thead>

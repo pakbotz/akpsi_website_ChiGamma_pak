@@ -180,10 +180,10 @@ export default function BrotherModal({
                 </p>
               </div>
               <div className="text-center">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/40">
+                <p className="text-xs py-2 uppercase tracking-[0.2em] text-white/40">
                   Class
                 </p>
-                <p className="mt-1 font-['Palatino_Linotype'] text-sm text-[#c8b89a]">
+                <p className="mt-1 text-sm text-white/85">
                   {brother.pledgeClass}
                 </p>
               </div>

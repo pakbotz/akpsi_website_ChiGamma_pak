@@ -10,20 +10,28 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion';
 // for how to bring the multi-term dropdown back later.
 const NAV_LINKS = [
   { label: 'About', href: '/about', num: '01' },
-  { label: 'Brothers', href: '/brothers', num: '02', hasSubmenu: true },
-  { label: 'Careers', href: '/careers', num: '03' },
+  { label: 'Brothers', href: '/brothers', num: '02', hasSubmenu: false },
+  { label: 'Careers', href: '/careers', num: '03', hasSubmenu: true},
   { label: 'Gallery', href: '/gallery', num: '04' },
   { label: 'Rush AKΨ', href: '/rush/fall-2026', num: '05' },
 ];
 
 const BROTHERS_LINKS = [
   { label: 'All Brothers', href: '/brothers' },
-  { label: 'Alumni Spotlights', href: '/brothers/alumni' },
+  { label: 'Intern Spotlight', href: '/brothers/alumni' },
 ];
+
+const CAREERS_LINKS = [
+  { label: 'Our Careers', href: '/careers' },
+  { label: 'Alumni Spotlight', href: '/careers/alumni' },
+  { label: 'Sub-Organizations', href: '/careers/suborgs' },
+];
+
 
 // Maps a NAV_LINKS label (for entries with hasSubmenu) to its sub-panel list.
 const SUBMENUS: Record<string, { label: string; href: string }[]> = {
   Brothers: BROTHERS_LINKS,
+  Careers: CAREERS_LINKS,
 };
 
 // ─── Framer Motion variants ────────────────────────────────────────
@@ -141,11 +149,11 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
           })}
         </motion.nav>
 
-        {/* Sub-panel — scrollable list of related pages (Brothers, Rush
+        {/* Sub-panel — list of related pages (Brothers, Rush
             terms), fades in beside the main nav exactly like Motto's
             "LEARN" hover panel. Content swaps based on which nav item
             with hasSubmenu is currently hovered. */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {showSubmenu && submenuOpenFor !== null && (
             <motion.div
               key={NAV_LINKS[submenuOpenFor].label}
@@ -161,7 +169,7 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
                 setHoveredIndex(null);
                 setSubmenuOpenFor(null);
               }}
-              className="ml-6 hidden max-h-[70vh] flex-col gap-3 overflow-y-auto pr-4 [scrollbar-width:thin] md:ml-10 md:flex lg:ml-16"
+              className="ml-6 hidden max-h-[80vh] flex-col gap-3 overflow-y-auto pr-4 md:ml-10 md:flex lg:ml-16"
             >
               {activeSubmenuLinks!.map((sub) => (
                 <motion.div key={sub.href} variants={subItemVariants}>

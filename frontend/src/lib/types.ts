@@ -34,7 +34,7 @@ export type CareerBrother = {
   name: string;
   position: string | null;
   company: string | null;
-  sector: string | null;
+  year: string | null;
   sort_order: number;
 };
 
@@ -52,6 +52,18 @@ export type JobSpotlight = {
 export type GalleryImage = {
   id: string;
   cloudinary_public_id: string;
+  created_at: string;
+};
+
+// The curated, captioned "Events" carousel on the public Gallery page —
+// deliberately a separate table from GalleryImage above. The plain photo
+// grid just needs images; this needs a caption and an explicit display
+// order per row, which is why it's not the same shape re-used.
+export type GalleryEvent = {
+  id: string;
+  cloudinary_public_id: string | null;
+  caption: string;
+  sort_order: number;
   created_at: string;
 };
 

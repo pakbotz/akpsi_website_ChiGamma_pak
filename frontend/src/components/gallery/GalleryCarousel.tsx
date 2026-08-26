@@ -3,23 +3,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { CldImage } from 'next-cloudinary';
+import type { GalleryEventSlide } from '@/lib/gallery';
 
-// Placeholder events reel — no real photos yet. Shape matches what a
-// future Supabase-backed version would need (just a caption), so
-// swapping in real data later is a matter of replacing this array with
-// a query result, not restructuring the component.
-const EVENTS = [
-  { caption: 'Info Night' },
-  { caption: 'LinkedIn Workshop' },
-  { caption: 'Beach Cleanup' },
-  { caption: 'Formal Retreat' },
-  { caption: 'Alumni Panel' },
-  { caption: 'Slug Tank' },
-  { caption: 'Toy Drive' },
-  { caption: 'Bid Night' },
-];
-
-export default function GalleryCarousel() {
+// The curated, captioned reel — fed by `getGalleryEvents()` from a Server
+// Component parent (see app/gallery/page.tsx). Renders nothing if there
+// are no events yet, so the "Events" heading above it in page.tsx is only
+// shown when there's actually something to scroll through.
+export default function GalleryCarousel({ events }: { events: GalleryEventSlide[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
@@ -48,21 +39,26 @@ export default function GalleryCarousel() {
     return () => cancelAnimationFrame(id);
   }, [emblaApi, onSelect]);
 
+  if (events.length === 0) return null;
+
   return (
     <div className="relative">
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex gap-4 sm:gap-6">
-          {EVENTS.map((slide, i) => (
-            <div key={i} className="min-w-0 shrink-0 basis-[85%] sm:basis-[60%] lg:basis-[46%]">
-              <div className="aspect-video w-full bg-[#1c1c1c]">
-                <div className="flex h-full w-full items-center justify-center">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
-                    Placeholder Photo
-                  </span>
-                </div>
+          {events.map((event) => (
+            <div key={event.id} className="min-w-0 shrink-0 basis-[85%] sm:basis-[60%] lg:basis-[46%]">
+              <div className="relative aspect-video w-full overflow-hidden bg-[#1c1c1c]">
+                <CldImage
+                  src={event.cloudinaryPublicId}
+                  alt={event.caption || 'Chapter event photo'}
+                  fill
+                  crop="fill"
+                  gravity="auto"
+                  className="object-cover"
+                />
               </div>
               <p className="mt-4 text-sm uppercase tracking-[0.15em] text-white/50">
-                {slide.caption}
+                {event.caption}
               </p>
             </div>
           ))}
@@ -90,9 +86,9 @@ export default function GalleryCarousel() {
         </div>
 
         <div className="hidden items-center gap-1.5 sm:flex">
-          {EVENTS.map((_, i) => (
+          {events.map((event, i) => (
             <span
-              key={i}
+              key={event.id}
               className="h-1.5 rounded-full transition-all"
               style={{
                 width: i === selectedIndex ? 24 : 6,
