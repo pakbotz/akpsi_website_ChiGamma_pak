@@ -24,7 +24,7 @@ const BROTHERS_LINKS = [
 const CAREERS_LINKS = [
   { label: 'Our Careers', href: '/careers' },
   { label: 'Alumni Spotlight', href: '/careers/alumni' },
-  { label: 'Sub-Organizations', href: '/careers/suborgs' },
+  { label: 'Psi Tech', href: '/careers/suborgs' },
 ];
 
 
@@ -68,9 +68,24 @@ const subItemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
+// Mobile accordion panel — expands/collapses underneath the tapped link.
+// Height auto-animates so it works for any number of sublinks without
+// tuning a fixed value per item.
+const mobileAccordionVariants: Variants = {
+  hidden: { height: 0, opacity: 0 },
+  visible: { height: 'auto', opacity: 1, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const } },
+  exit: { height: 0, opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } },
+};
+
 export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [submenuOpenFor, setSubmenuOpenFor] = useState<number | null>(null);
+  // Separate from the desktop hover state above — mobile has no hover, so
+  // tapping a hasSubmenu link toggles this instead of navigating away.
+  // Keyed by label (not index) purely so it reads clearly; only one entry
+  // is ever expanded at a time, same single-panel feel as the desktop
+  // hover version.
+  const [mobileExpandedLabel, setMobileExpandedLabel] = useState<string | null>(null);
 
   const activeSubmenuLinks =
     submenuOpenFor !== null ? SUBMENUS[NAV_LINKS[submenuOpenFor].label] : undefined;
@@ -110,9 +125,17 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
         >
           {NAV_LINKS.map((link, i) => {
             const isDimmed = hoveredIndex !== null && hoveredIndex !== i;
+            const numColor = isDimmed ? '#333' : '#555';
+            const desktopLabelColor = hoveredIndex === i ? '#ffffff' : isDimmed ? '#2a2a2a' : '#555555';
+
+            const subLinks = link.hasSubmenu ? SUBMENUS[link.label] : undefined;
+            const isMobileExpanded = mobileExpandedLabel === link.label;
+            const mobileLabelColor = isMobileExpanded ? '#ffffff' : '#555555';
 
             return (
               <motion.div key={link.href} variants={itemVariants}>
+                {/* Desktop row (md and up) — unchanged: click navigates,
+                    hover opens the side sub-panel for hasSubmenu items. */}
                 <Link
                   href={link.href}
                   onClick={onClose}
@@ -122,28 +145,109 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
                     else setSubmenuOpenFor(null);
                   }}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  className="group flex items-baseline gap-4 py-2"
+                  className="group hidden items-baseline gap-4 py-2 md:flex"
                 >
                   <span
                     className="text-xs tabular-nums transition-colors duration-200"
-                    style={{ color: isDimmed ? '#333' : '#555' }}
+                    style={{ color: numColor }}
                   >
                     ({link.num})
                   </span>
                   <span
                     className="text-5xl md:text-7xl font-medium leading-none tracking-tight transition-colors duration-200"
-                    style={{
-                      color:
-                        hoveredIndex === i
-                          ? '#ffffff'
-                          : isDimmed
-                          ? '#2a2a2a'
-                          : '#555555',
-                    }}
+                    style={{ color: desktopLabelColor }}
                   >
                     {link.label}
                   </span>
                 </Link>
+
+                {/* Mobile row (below md) — a plain link for items with no
+                    sublinks, same as before; for hasSubmenu items, a
+                    button that expands an accordion underneath instead of
+                    navigating immediately. */}
+                {subLinks ? (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setMobileExpandedLabel(isMobileExpanded ? null : link.label)
+                    }
+                    aria-expanded={isMobileExpanded}
+                    className="flex w-full items-center justify-between gap-4 py-2 text-left md:hidden"
+                  >
+                    <span className="flex items-baseline gap-4">
+                      <span
+                        className="text-xs tabular-nums transition-colors duration-200"
+                        style={{ color: numColor }}
+                      >
+                        ({link.num})
+                      </span>
+                      <span
+                        className="text-5xl font-medium leading-none tracking-tight transition-colors duration-200"
+                        style={{ color: mobileLabelColor }}
+                      >
+                        {link.label}
+                      </span>
+                    </span>
+                    <motion.span
+                      animate={{ rotate: isMobileExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-lg"
+                      style={{ color: mobileLabelColor }}
+                    >
+                      ▾
+                    </motion.span>
+                  </button>
+                ) : (
+                  <Link
+                    href={link.href}
+                    onClick={onClose}
+                    className="flex items-baseline gap-4 py-2 md:hidden"
+                  >
+                    <span
+                      className="text-xs tabular-nums transition-colors duration-200"
+                      style={{ color: numColor }}
+                    >
+                      ({link.num})
+                    </span>
+                    <span
+                      className="text-5xl font-medium leading-none tracking-tight transition-colors duration-200"
+                      style={{ color: '#555555' }}
+                    >
+                      {link.label}
+                    </span>
+                  </Link>
+                )}
+
+                {/* Mobile accordion — sublinks pop up directly underneath
+                    the tapped link. Driven entirely by `subLinks`, so any
+                    NAV_LINKS entry with hasSubmenu: true + a SUBMENUS
+                    entry gets this automatically, no extra wiring. */}
+                {subLinks && (
+                  <AnimatePresence initial={false}>
+                    {isMobileExpanded && (
+                      <motion.div
+                        variants={mobileAccordionVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="overflow-hidden md:hidden"
+                      >
+                        <div className="flex flex-col gap-1 py-2 pl-8">
+                          {subLinks.map((sub) => (
+                            <Link
+                              key={sub.href}
+                              href={sub.href}
+                              onClick={onClose}
+                              className="block py-1.5 text-lg font-medium leading-none tracking-tight text-white/50 transition-colors hover:text-white"
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
               </motion.div>
             );
           })}
@@ -152,7 +256,8 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
         {/* Sub-panel — list of related pages (Brothers, Rush
             terms), fades in beside the main nav exactly like Motto's
             "LEARN" hover panel. Content swaps based on which nav item
-            with hasSubmenu is currently hovered. */}
+            with hasSubmenu is currently hovered. Desktop only (md:flex) —
+            mobile uses the accordion above instead. */}
         <AnimatePresence mode="wait">
           {showSubmenu && submenuOpenFor !== null && (
             <motion.div
