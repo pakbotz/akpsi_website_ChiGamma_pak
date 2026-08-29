@@ -41,6 +41,7 @@ export default function BrotherModal({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       onClick={onClose}
+      data-lenis-prevent
       className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/80 p-6 backdrop-blur-sm"
     >
       <motion.div
@@ -59,6 +60,7 @@ export default function BrotherModal({
           Close
         </button>
 
+<<<<<<< Updated upstream
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[280px_1fr]">
           <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#1c1c1c]">
             {brother.photoUrl ? (
@@ -74,6 +76,39 @@ export default function BrotherModal({
                   Placeholder Photo
                 </span>
               </div>
+=======
+        <div className="grid grid-cols-1 gap-10 pt-10 md:grid-cols-[280px_1fr] md:pt-0">
+          <div>
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#1c1c1c]">
+              {brother.cloudinaryPublicId ? (
+                <CldImage
+                  src={brother.cloudinaryPublicId}
+                  alt={brother.name}
+                  fill
+                  crop="fill"
+                  loading="lazy"
+                  gravity="auto"
+                  sizes="(max-width: 768px) 50vw,
+                  (max-width: 1200px) 25vw,
+                  200px"
+                  format="auto"
+                  quality="auto"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center">
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
+                    Placeholder Photo
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {brother.pastPositions.length > 0 && (
+               <p className="mt-3 text-center text-[0.9rem] text-white/40">
+                Past Positions: {brother.pastPositions.join(' · ')}
+                </p>
+>>>>>>> Stashed changes
             )}
           </div>
 
