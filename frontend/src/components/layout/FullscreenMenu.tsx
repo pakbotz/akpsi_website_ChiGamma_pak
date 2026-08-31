@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { SubOrganization } from '@/lib/types';
 
 // ─── Nav links config ──────────────────────────────────────────────
 // Rush is a single destination for now (points straight at the current
@@ -11,7 +12,7 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion';
 const NAV_LINKS = [
   { label: 'About', href: '/about', num: '01' },
   { label: 'Brothers', href: '/brothers', num: '02', hasSubmenu: false },
-  { label: 'Careers', href: '/careers', num: '03', hasSubmenu: true},
+  { label: 'Careers', href: '/careers', num: '03', hasSubmenu: true },
   { label: 'Gallery', href: '/gallery', num: '04' },
   { label: 'Rush AKΨ', href: '/rush/fall-2026', num: '05' },
 ];
@@ -20,19 +21,6 @@ const BROTHERS_LINKS = [
   { label: 'All Brothers', href: '/brothers' },
   { label: 'Intern Spotlight', href: '/brothers/alumni' },
 ];
-
-const CAREERS_LINKS = [
-  { label: 'Our Careers', href: '/careers' },
-  { label: 'Alumni Spotlight', href: '/careers/alumni' },
-  { label: 'Psi Tech', href: '/careers/suborgs' },
-];
-
-
-// Maps a NAV_LINKS label (for entries with hasSubmenu) to its sub-panel list.
-const SUBMENUS: Record<string, { label: string; href: string }[]> = {
-  Brothers: BROTHERS_LINKS,
-  Careers: CAREERS_LINKS,
-};
 
 // ─── Framer Motion variants ────────────────────────────────────────
 const overlayVariants: Variants = {
@@ -68,16 +56,13 @@ const subItemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-// Mobile accordion panel — expands/collapses underneath the tapped link.
-// Height auto-animates so it works for any number of sublinks without
-// tuning a fixed value per item.
-const mobileAccordionVariants: Variants = {
-  hidden: { height: 0, opacity: 0 },
-  visible: { height: 'auto', opacity: 1, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const } },
-  exit: { height: 0, opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } },
-};
-
-export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
+export default function FullscreenMenu({
+  subOrganizations,
+  onClose,
+}: {
+  subOrganizations: SubOrganization[];
+  onClose: () => void;
+}) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [submenuOpenFor, setSubmenuOpenFor] = useState<number | null>(null);
   // Separate from the desktop hover state above — mobile has no hover, so
@@ -86,6 +71,23 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
   // is ever expanded at a time, same single-panel feel as the desktop
   // hover version.
   const [mobileExpandedLabel, setMobileExpandedLabel] = useState<string | null>(null);
+
+  const careersLinks = [
+    { label: 'Our Careers', href: '/careers' },
+    { label: 'Alumni Spotlight', href: '/careers/alumni' },
+    ...subOrganizations.map((org) => ({
+      label: org.name,
+      href: `/sub-organizations/${org.slug}`,
+    })),
+  ];
+
+  // Maps a NAV_LINKS label (for entries with hasSubmenu) to its sub-panel
+  // list. Careers' list is built above since it depends on the live
+  // Supabase-backed sub-organizations.
+  const SUBMENUS: Record<string, { label: string; href: string }[]> = {
+    Brothers: BROTHERS_LINKS,
+    Careers: careersLinks,
+  };
 
   const activeSubmenuLinks =
     submenuOpenFor !== null ? SUBMENUS[NAV_LINKS[submenuOpenFor].label] : undefined;
@@ -253,11 +255,10 @@ export default function FullscreenMenu({ onClose }: { onClose: () => void }) {
           })}
         </motion.nav>
 
-        {/* Sub-panel — list of related pages (Brothers, Rush
-            terms), fades in beside the main nav exactly like Motto's
-            "LEARN" hover panel. Content swaps based on which nav item
-            with hasSubmenu is currently hovered. Desktop only (md:flex) —
-            mobile uses the accordion above instead. */}
+        {/* Sub-panel — list of related pages (Brothers, Careers'
+            sub-organizations), fades in beside the main nav exactly like
+            Motto's "LEARN" hover panel. Content swaps based on which nav
+            item with hasSubmenu is currently hovered. */}
         <AnimatePresence mode="wait">
           {showSubmenu && submenuOpenFor !== null && (
             <motion.div
