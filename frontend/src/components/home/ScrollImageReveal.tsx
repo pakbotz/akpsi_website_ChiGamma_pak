@@ -220,7 +220,7 @@ export default function ScrollImageReveal({
             sm:w-[48vw]
           "
           style={{
-            top: 'calc(50% + (48vw * 9/32) + .5rem)',
+            top: 'calc(50% + (50vw * 9/31) + .5rem)',
             fontSize: 'clamp(1rem, 1vw, .5rem)',
           }}
         >

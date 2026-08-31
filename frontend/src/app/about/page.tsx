@@ -3,7 +3,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-
+import Footer from '@/components/home/Footer';
 /* ------------------------------------------------------------------
    About page — dark theme, matching the home page, with motion:
    scroll reveals, a hero entrance, a full-bleed scrolling marquee,
@@ -400,6 +400,7 @@ export default function AboutPage() {
           </section>
         </Container>
       </div>
+      <Footer />
     </div>
   );
 }
