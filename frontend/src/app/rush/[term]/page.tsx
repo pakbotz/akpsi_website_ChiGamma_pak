@@ -3,6 +3,14 @@ import { RUSH_TERMS, getRushTerm } from '@/lib/rushTerms';
 import RushTermView from '@/components/rush/RushTermView';
 import ArcteryxTermView from '@/components/rush/ArcteryxTermView';
 import BapeTermView from '@/components/rush/BapeTermView';
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+ title: "Rush AKΨ | Alpha Kappa Psi - Chi Gamma",
+ description: "Discover our rush schedule and how to join the Chi Gamma chapter.",
+ keywords: ["Rush", "Bape", "Recruitment", "Prospecting", "Pledge", "Alpha Kappa Psi", "Chi Gamma", "UCSC", "AKPSI"],
+};
 
 export function generateStaticParams() {
   return RUSH_TERMS.map((term) => ({ term: term.slug }));

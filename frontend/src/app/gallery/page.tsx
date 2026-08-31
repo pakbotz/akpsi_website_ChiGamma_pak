@@ -3,6 +3,14 @@ import GalleryCarousel from '@/components/gallery/GalleryCarousel';
 import GalleryGrid from '@/components/gallery/GalleryGrid';
 import Footer from '@/components/home/Footer';
 import { getGalleryImages, getGalleryEvents } from '@/lib/gallery';
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+ title: "Gallery | Alpha Kappa Psi - Chi Gamma",
+ description: "Explore photos and moments from the Chi Gamma chapter.",
+ keywords: ["Gallery", "Photos", "Brotherhood","Alpha Kappa Psi", "Chi Gamma", "UCSC", "AKPSI"],
+};
 
 export default async function GalleryPage() {
   const [images, events] = await Promise.all([getGalleryImages(), getGalleryEvents()]);
