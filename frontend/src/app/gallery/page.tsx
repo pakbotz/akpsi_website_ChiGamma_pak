@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import GalleryCarousel from '@/components/gallery/GalleryCarousel';
 import GalleryGrid from '@/components/gallery/GalleryGrid';
+import Footer from '@/components/home/Footer';
 import { getGalleryImages, getGalleryEvents } from '@/lib/gallery';
 
 export default async function GalleryPage() {
@@ -48,6 +49,8 @@ export default async function GalleryPage() {
           </Link>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

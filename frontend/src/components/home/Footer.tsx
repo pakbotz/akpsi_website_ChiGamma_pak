@@ -7,9 +7,11 @@ export default function Footer() {
 
             <p className="max-w-xl text-2xl leading-snug text-white/80 sm:text-3xl">
               For recruitment updates, follow our instagram{' '}
-              <span className="text-white">@ucscakpsi</span>
+              <a className="text-white underline" href="https://www.instagram.com/ucscakpsi/" target="_blank" rel="noopener noreferrer">
+                @ucscakpsi
+              </a>
             </p>
-            
+
             <span
               className="font-medium leading-none tracking-tight text-[#f0eeea]"
               style={{ fontSize: 'clamp(2.5rem, 9vw, 7rem)' }}
@@ -31,7 +33,7 @@ export default function Footer() {
                   <li><a href="/about">About</a></li>
                   <li><a href="/brothers">Our Brothers</a></li>
                   <li><a href="/careers">Careers</a></li>
-                  <li><a href="/careers">Intern Spotlight</a></li>
+                  <li><a href="/careers/alumni">Alumni Spotlight</a></li>
                   <li><a href="/gallery">Gallery</a></li>
                   
                 </ul>
@@ -42,15 +44,18 @@ export default function Footer() {
                 <h3 className="mb-5 text-sm text-white">Get Involved!</h3>
                 <ul className="flex flex-col gap-3 text-sm text-white/45">
                   <li><a href="/rush">Rush AKΨ</a></li>
+                  <li><a href="/careers/suborgs">Sub Organizations</a></li>
                   <li><a href="https://linktr.ee/ucscakpsi?utm_source=ig&utm_medium=social&utm_content=link_in_bio">Interest Form</a></li>
                 </ul>
               </div>
   
               {/* Contact */}
               <div>
-                <h3 className="mb-5 text-sm text-white">Contact</h3>
+                <h3 className="mb-5 text-sm text-white">Contact Us!</h3>
                 <ul className="flex flex-col gap-3 text-sm text-white/45">
-                  <li><a href="mailto:ucsc.akpsi@gmail.com" target="_blank">Contact Us</a></li>
+                  <li><a href="mailto:ucsc.akpsi@gmail.com" target="_blank">Email</a></li>
+                  <li><a href="https://www.instagram.com/ucscakpsi/" target="_blank">Instagram</a></li>
+                  <li><a href="https://www.linkedin.com/company/alpha-kappa-psi-chi-gamma/" target="_blank">LinkedIn</a></li>
                 </ul>
               </div>
             </div>
@@ -59,7 +64,29 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="mt-20 flex flex-col items-start justify-between gap-4 border-t border-white/10 py-8 text-xs text-white/30 sm:flex-row sm:items-center">
             <span>© UCSC Alpha Kappa Psi 2026. All rights reserved.</span>
-            <span>AKΨ — Chi Gamma Chapter</span>
+            <p>
+              Developed by Ψ Tech's {' '}
+              <a className="underline" href="https://www.linkedin.com/in/jaycobpakingan/" target="_blank" rel="noopener noreferrer">
+                Jaycob Pakingan
+              </a>
+              {', '}
+              <a className="underline" href="https://www.linkedin.com/in/ethen-dhanaraj/" target="_blank" rel="noopener noreferrer">
+                Ethen Dhanaraj
+              </a>
+              {', '}
+              <a className="underline" href="https://www.linkedin.com/in/haatim-ali/" target="_blank" rel="noopener noreferrer">
+                Haatim Ali
+              </a>
+              {', '}
+              <a className="underline" href="https://www.linkedin.com/in/saraxjain/" target="_blank" rel="noopener noreferrer">
+                Sara Jain
+              </a>
+              {', and '}
+              <a className="underline" href="https://www.linkedin.com/in/chintan-patwardhan/" target="_blank" rel="noopener noreferrer">
+                Chintan Patwardhan
+              </a>
+            </p>
+  
           </div>
         </div>
       </footer>
