@@ -4,15 +4,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Footer from '@/components/home/Footer';
-import type { Metadata } from "next";
-
-
-export const metadata: Metadata = {
- title: "About | Alpha Kappa Psi - Chi Gamma",
- description: "Learn about the Chi Gamma chapter history and values.",
- keywords: ["About", "mission", "Alpha Kappa Psi", "Chi Gamma", "UCSC", "AKPSI"],
-};
-
 /* ------------------------------------------------------------------
    About page — dark theme, matching the home page, with motion:
    scroll reveals, a hero entrance, a full-bleed scrolling marquee,
