@@ -15,7 +15,8 @@ export default function FilterDropdown({
   options: string[];
   selected: string;
   onChange: (value: string) => void;
-  renderLabel?: (option: string) => string;
+  // FilterDropdown.tsx — one-line type change
+  renderLabel?: (option: string) => React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
