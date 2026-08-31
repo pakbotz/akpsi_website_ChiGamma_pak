@@ -1,3 +1,5 @@
+'use client';
+
 import { SubOrganization } from '@/lib/types';
 import SubOrgCard from './SubOrgCard';
 

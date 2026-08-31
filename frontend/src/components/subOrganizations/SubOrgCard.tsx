@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SubOrganization } from '@/lib/types';
+import { CldImage } from 'next-cloudinary';
 
 export default function SubOrgCard({ org }: { org: SubOrganization }) {
   return (
@@ -10,13 +11,16 @@ export default function SubOrgCard({ org }: { org: SubOrganization }) {
       <div className="flex items-start justify-between gap-4">
         <h2 className="text-lg font-medium text-[#f0eeea]">{org.name}</h2>
 
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden bg-[#1c1c1c]">
+        <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-md bg-[#1c1c1c]">
           {org.logo_url ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <CldImage
               src={org.logo_url}
               alt={`${org.name} logo`}
-              className="h-full w-full object-contain"
+              fill
+              crop="fill"
+              sizes="48px"
+              className="object-contain"
             />
           ) : (
             <span className="text-[8px] uppercase tracking-[0.2em] text-white/25">

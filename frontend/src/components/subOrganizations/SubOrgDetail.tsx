@@ -1,4 +1,8 @@
+'use client'; 
+
 import Link from 'next/link';
+// Ensure this matches the exact library you are using for Cloudinary components (e.g., 'next-cloudinary')
+import { CldImage } from 'next-cloudinary'; 
 import {
   SubOrganization,
   SubOrganizationMedia,
@@ -46,13 +50,17 @@ export default function SubOrgDetail({
             </h1>
           </div>
 
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden bg-[#1c1c1c]">
+          {/* Fixed Logo Box Container */}
+          <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden bg-[#1c1c1c]">
             {org.logo_url ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <CldImage
                 src={org.logo_url}
                 alt={`${org.name} logo`}
-                className="h-full w-full object-contain"
+                fill
+                crop="fill"
+                sizes="80px"
+                className="object-contain"
               />
             ) : (
               <span className="text-[8px] uppercase tracking-[0.2em] text-white/25">
