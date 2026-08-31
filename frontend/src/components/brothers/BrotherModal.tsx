@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { CldImage } from 'next-cloudinary';
 import { Brother } from '@/lib/brothers';
+import { UserRound } from 'lucide-react';
 
 
 function LinkedinIcon({ size = 15 }: { size?: number }) {
@@ -105,9 +106,10 @@ export default function BrotherModal({
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
-                    Placeholder Photo
-                  </span>
+                  <UserRound
+                    className="h-1/2 w-1/2 text-gray-400"
+                    strokeWidth={1.5}
+                  />
                 </div>
               )}
             </div>

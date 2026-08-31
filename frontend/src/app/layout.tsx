@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Alpha Kappa Psi - Chi Gamma',
   description: 'The premier professional business fraternity at UCSC',
+  keywords: ["Alpha Kappa Psi", "Chi Gamma", "UCSC", "AKPSI" , "UCSC AKPSI", "Professional Fraternity", "Business Fraternity"],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
