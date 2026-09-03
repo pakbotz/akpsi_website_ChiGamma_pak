@@ -71,7 +71,7 @@ export const RUSH_TERMS: RushTerm[] = [
     label: 'Fall 2026',
     status: 'active',
     theme: 'bape',
-    blurb: 'Our current recruitment cycle. Dates below are placeholders until the chapter confirms the schedule.',
+    blurb: '',
     applyBy: 'TBA',
     applyUrl: '#',
     interestFormUrl: '#',
