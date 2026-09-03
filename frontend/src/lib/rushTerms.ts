@@ -35,31 +35,31 @@ export type RushTerm = {
 const DEFAULT_EVENTS: RushEvent[] = [
   {
     name: 'Info Night',
-    date: 'TBA',
+    date: '9/28',
     description:
       'An open house introduction to Alpha Kappa Psi — meet the brothers, learn about our mission, and get an overview of the recruitment process.',
   },
   {
     name: 'Meet the Chapter',
-    date: 'TBA',
+    date: '9/29',
     description:
       'A casual, conversational event where you can talk one-on-one with brothers and get a feel for chapter culture.',
   },
   {
-    name: 'LinkedIn Workshop / Alumni Panel',
-    date: 'TBA',
+    name: 'LinkedIn Workshop',
+    date: '9/30',
     description:
       'A professional development session covering resume and LinkedIn best practices, followed by a Q&A panel with AKPsi alumni about their career paths.',
   },
   {
     name: 'Beach Cleanup',
-    date: 'TBA',
+    date: '10/1',
     description:
       'A philanthropy event where prospective members join brothers in giving back to the Santa Cruz community.',
   },
   {
     name: 'Slug Tank',
-    date: 'TBA',
+    date: '10/3',
     description:
       'Our Shark-Tank-style pitch event, where prospective members work in teams to present a business idea to a panel of brothers.',
   },
@@ -100,7 +100,7 @@ export const RUSH_TERMS: RushTerm[] = [
           'A casual, conversational event where you can talk one-on-one with brothers and get a feel for chapter culture.',
       },
       {
-        name: 'LinkedIn Workshop / Alumni Panel',
+        name: 'LinkedIn Workshop',
         date: '4/1',
         description:
           'A professional development session covering resume and LinkedIn best practices, followed by a Q&A panel with AKPsi alumni about their career paths.',
