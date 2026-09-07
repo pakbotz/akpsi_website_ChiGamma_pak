@@ -33,7 +33,7 @@ export default function Footer() {
                   <li><a href="/about">About</a></li>
                   <li><a href="/brothers">Our Brothers</a></li>
                   <li><a href="/careers">Careers</a></li>
-                  <li><a href="/careers/alumni">Alumni Spotlight</a></li>
+                  <li><a href="/careers/job_spotlight">Job Spotlight</a></li>
                   <li><a href="/gallery">Gallery</a></li>
                   
                 </ul>

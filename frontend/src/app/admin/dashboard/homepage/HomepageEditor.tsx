@@ -92,12 +92,7 @@ export default function HomepageEditor({
       {/* ── 1. Hero ─────────────────────────────────────────────────── */}
       <Section title="Hero">
         <div className="max-w-xs">
-          <ImageUploadCard
-            label="Hero background photo"
-            publicId={images.hero_background ?? null}
-            saving={savingKey === 'hero_background'}
-            onUploaded={(id) => saveImageSlot('hero_background', id)}
-          />
+          do this upload through Supabase for now.
         </div>
       </Section>
 
@@ -162,7 +157,15 @@ export default function HomepageEditor({
       </Section>
 
       {/* ── 5. Interested in Joining? (Rush carousel) ───────────────── */}
-      <Section title='"Interested in Joining?" carousel — 4 photos'>
+      <Section title='"Interested in Joining?" — Rush preview + 4 carousel photos'>
+        <div className="mb-8 max-w-xs">
+          <ImageUploadCard
+            label="Rush preview card (links to /rush)"
+            publicId={images.rush_preview ?? null}
+            saving={savingKey === 'rush_preview'}
+            onUploaded={(id) => saveImageSlot('rush_preview', id)}
+          />
+        </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {slides.map((slide) => (
             <ImageUploadCard

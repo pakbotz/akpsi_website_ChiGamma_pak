@@ -17,10 +17,7 @@ const NAV_LINKS = [
   { label: 'Rush AKΨ', href: '/rush/fall-2026', num: '05' },
 ];
 
-const BROTHERS_LINKS = [
-  { label: 'All Brothers', href: '/brothers' },
-  { label: 'Intern Spotlight', href: '/brothers/alumni' },
-];
+
 
 // ─── Framer Motion variants ────────────────────────────────────────
 const overlayVariants: Variants = {
@@ -80,7 +77,7 @@ export default function FullscreenMenu({
 
   const careersLinks = [
     { label: 'Our Careers', href: '/careers' },
-    { label: 'Alumni Spotlight', href: '/careers/alumni' },
+    { label: 'Job Spotlight', href: '/careers/job_spotlight' },
     ...subOrganizations.map((org) => ({
       label: org.name,
       href: `/sub-organizations/${org.slug}`,
@@ -91,7 +88,6 @@ export default function FullscreenMenu({
   // list. Careers' list is built above since it depends on the live
   // Supabase-backed sub-organizations.
   const SUBMENUS: Record<string, { label: string; href: string }[]> = {
-    Brothers: BROTHERS_LINKS,
     Careers: careersLinks,
   };
 

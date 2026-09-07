@@ -53,8 +53,12 @@ export default function ImageUploadCard({
             src={publicId}
             alt={label}
             fill
+            sizes="(max-width: 768px) 33vw, 33vw"
             crop="fill"
             gravity="auto"
+            loading="lazy"
+            format="auto"
+            quality="auto"
             className="object-cover"
           />
         ) : (
