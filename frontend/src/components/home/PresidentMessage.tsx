@@ -22,7 +22,7 @@ export default function PresidentMessage({
           A Note From Leadership
         </p>
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
+        <div className="grid grid-cols-1 gap-22 md:grid-cols-2 md:gap-16 sm:gap-16">
           <div
             className="group relative aspect-[4/5] w-full cursor-pointer overflow-hidden bg-[#1c1c1c]"
             onMouseEnter={() => setHovered(true)}
@@ -33,7 +33,7 @@ export default function PresidentMessage({
                 src={photoPublicId} 
                 alt="Chapter President" 
                 fill 
-                sizes="(max-width: 768px) 40vw, 40vw"
+                sizes="(max-width: 768px) 30vw, 30vw"
                 aspectRatio="4:5"
                 crop="fill"
                 gravity="auto"
@@ -73,7 +73,7 @@ export default function PresidentMessage({
               className="mb-6 font-medium leading-[1.05] tracking-tight text-[#f0eeea]"
               style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.25rem)' }}
             >
-              A Message from our President
+              A Message from Our President
             </h2>
             <p className="whitespace-pre-line text-sm leading-relaxed text-white/55 sm:text-base">
               {message}
