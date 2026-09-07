@@ -33,7 +33,7 @@ export default function Footer() {
                   <li><a href="/about">About</a></li>
                   <li><a href="/brothers">Our Brothers</a></li>
                   <li><a href="/careers">Careers</a></li>
-                  <li><a href="/careers/alumni">Alumni Spotlight</a></li>
+                  <li><a href="/careers/job_spotlight">Job Spotlight</a></li>
                   <li><a href="/gallery">Gallery</a></li>
                   
                 </ul>
@@ -44,7 +44,7 @@ export default function Footer() {
                 <h3 className="mb-5 text-sm text-white">Get Involved!</h3>
                 <ul className="flex flex-col gap-3 text-sm text-white/45">
                   <li><a href="/rush">Rush AKΨ</a></li>
-                  <li><a href="/careers/suborgs">Sub Organizations</a></li>
+                  <li><a href="/sub-organizations">Sub Organizations</a></li>
                   <li><a href="https://linktr.ee/ucscakpsi?utm_source=ig&utm_medium=social&utm_content=link_in_bio">Interest Form</a></li>
                 </ul>
               </div>

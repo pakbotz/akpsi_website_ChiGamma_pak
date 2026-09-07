@@ -21,7 +21,7 @@ export default function Hero({ backgroundImage }: { backgroundImage: string | nu
       <div className="absolute inset-0">
         {backgroundImage && (
           <video
-            src={getCldVideoUrl({ src: backgroundImage, format: 'mp4', quality: 'auto' })}
+            src={getCldVideoUrl({ src: backgroundImage, format: 'auto', quality: 'auto', rawTransformations: ['vc_auto'] })}
             autoPlay
             muted
             loop
