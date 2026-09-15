@@ -39,7 +39,7 @@ export default async function Home() {
         name={textByKey.president_name ?? ''}
         message={textByKey.president_message ?? ''}
       />
-      <InterestedSection slides={slides ?? []} />
+       <InterestedSection slides={slides ?? []} rushPreviewPublicId={byKey.rush_preview ?? null} />
       <FAQSection />
       <Footer />
     </div>

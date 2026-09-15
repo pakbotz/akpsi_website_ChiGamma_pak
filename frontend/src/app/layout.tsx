@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ReactNode } from 'react';
 import Providers from '@/components/providers/Providers';
 import Navbar from '@/components/layout/Navbar';
+import { getSubOrganizations } from '@/lib/api';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -18,14 +19,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Alpha Kappa Psi - Chi Gamma',
   description: 'The premier professional business fraternity at UCSC',
+  keywords: ["Alpha Kappa Psi", "Chi Gamma", "UCSC", "AKPSI" , "UCSC AKPSI", "Professional Fraternity", "Business Fraternity"],
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const subOrganizations = await getSubOrganizations();
+
   return (
     <html lang="en">
       <body>
         <Providers>
-          <Navbar />
+          <Navbar subOrganizations={subOrganizations} />
             <main>{children}</main>
         </Providers>
       </body>

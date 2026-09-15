@@ -1,6 +1,7 @@
 import { CldImage } from 'next-cloudinary';
 import { Brother } from '@/lib/brothers';
 import { toGreekLetter } from '@/lib/greekAlphabet';
+import { UserRound } from 'lucide-react';
 
 export default function BrotherCard({
   brother,
@@ -33,10 +34,11 @@ export default function BrotherCard({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
-              Placeholder Photo
-            </span>
-          </div>
+                  <UserRound
+                    className="h-1/2 w-1/2 text-gray-400"
+                    strokeWidth={1.5}
+                  />
+                </div>
         )}
       </div>
 
@@ -53,7 +55,7 @@ export default function BrotherCard({
           </span>
         </div>
 
-        <p className="mt-1 text-sm text-white/55">
+        <p className="mt-1 line-clamp-2 min-h-[1.5em] text-sm text-white/55">
           {brother.major}
           {brother.minor ? ` · ${brother.minor}` + ' Minor': ''}
         </p>
@@ -62,11 +64,9 @@ export default function BrotherCard({
           {brother.currentYear ?? '—'}
         </p>
 
-        {brother.positions.length > 0 && (
-          <p className="mt-2 text-xs uppercase tracking-[0.1em] text-white/40">
-            {brother.positions.join(' · ')}
-          </p>
-        )}
+        <p className="mt-2 min-h-[1em] text-xs uppercase tracking-[0.1em] text-white/40">
+          {brother.positions.length > 0 ? brother.positions.join(' · ') : ' '}
+        </p>
       </div>
     </button>
   );

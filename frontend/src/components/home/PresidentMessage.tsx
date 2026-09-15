@@ -37,6 +37,7 @@ export default function PresidentMessage({
                 aspectRatio="4:5"
                 crop="fill"
                 gravity="auto"
+                format="auto"
                 className="object-cover" 
               />
             ) : (

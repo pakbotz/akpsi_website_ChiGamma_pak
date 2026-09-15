@@ -62,9 +62,12 @@ export default function BrotherDirectory({ brothers }: { brothers: Brother[] }) 
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-x-8 gap-y-14">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-start justify-center gap-x-4 gap-y-10 sm:gap-x-8 sm:gap-y-14">
           {visibleBrothers.map((brother) => (
-            <div key={brother.id} className="w-64 shrink-0">
+            <div
+              key={brother.id}
+              className="w-[calc((100%-1rem)/2)] sm:w-[calc((100%-4rem)/3)] lg:w-[calc((100%-6rem)/4)]"
+            >
               <BrotherCard
                 brother={brother}
                 onClick={() => setSelectedBrother(brother)}

@@ -90,7 +90,8 @@ export default function RushCarousel({ slides }: { slides: Slide[] }) {
                       aspectRatio="4:5"
                       crop="fill"
                       gravity="auto"
-                      loading="lazy"
+                      format="auto"
+                      quality="auto"
                       className="object-cover"
                     />
                   ) : (

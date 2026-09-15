@@ -5,12 +5,14 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { CldImage } from 'next-cloudinary';
 
+import Footer from '@/components/home/Footer';
 /* ------------------------------------------------------------------
    About page — dark theme, matching the home page, with motion:
    scroll reveals, a hero entrance, a full-bleed scrolling marquee,
    an animated count-up stats band, and hover interactions.
    Font forced to the site font (Neue Montreal) so it never falls to serif.
 ------------------------------------------------------------------- */
+
 
 const CREAM = '#f0eeea';
 const GOLD = '#c8b89a';
@@ -537,6 +539,7 @@ export default function AboutPage() {
         </div>
       </div>
       </div>
+      <Footer />
     </div>
   );
 }

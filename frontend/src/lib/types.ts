@@ -34,7 +34,7 @@ export type CareerBrother = {
   name: string;
   position: string | null;
   company: string | null;
-  sector: string | null;
+  year: string | null;
   sort_order: number;
 };
 
@@ -55,6 +55,18 @@ export type GalleryImage = {
   created_at: string;
 };
 
+// The curated, captioned "Events" carousel on the public Gallery page —
+// deliberately a separate table from GalleryImage above. The plain photo
+// grid just needs images; this needs a caption and an explicit display
+// order per row, which is why it's not the same shape re-used.
+export type GalleryEvent = {
+  id: string;
+  cloudinary_public_id: string | null;
+  caption: string;
+  sort_order: number;
+  created_at: string;
+};
+
 export type HomepageImageSlot = {
   slot_key: string;
   cloudinary_public_id: string | null;
@@ -66,5 +78,43 @@ export type RushCarouselSlide = {
   caption: string;
   location: string | null;
   event_datetime: string | null;
- instagram_post_url: string | null;
+  instagram_post_url: string | null;
+};
+
+export type SubOrganization = {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  logo_url: string | null;
+};
+
+export type SubOrganizationMedia = {
+  id: string;
+  sub_organization_id: string;
+  type: 'photo' | 'text_block';
+  cloudinary_public_id: string | null;
+  // For a 'text_block' row, distinguishes named sections (e.g. "Mission",
+  // "About") — unused for 'photo' rows.
+  title: string | null;
+  content: string | null;
+  display_order: number;
+};
+
+export type SubOrgTeamMember = {
+  id: string;
+  sub_organization_id: string;
+  name: string;
+  position: string | null;
+  bio: string | null;
+  photo_url: string | null;
+  display_order: number;
+};
+
+export type SubOrgChecklistItem = {
+  id: string;
+  sub_organization_id: string;
+  title: string;
+  description: string | null;
+  display_order: number;
 };

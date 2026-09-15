@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { CldImage } from 'next-cloudinary';
 import { Brother } from '@/lib/brothers';
-import { toGreekLetter } from '@/lib/greekAlphabet';
+import { UserRound } from 'lucide-react';
 
 
 function LinkedinIcon({ size = 15 }: { size?: number }) {
@@ -68,6 +68,7 @@ export default function BrotherModal({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       onClick={onClose}
+      data-lenis-prevent
       className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/80 p-6 backdrop-blur-sm"
     >
       <motion.div
@@ -86,7 +87,7 @@ export default function BrotherModal({
           Close
         </button>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[280px_1fr]">
+        <div className="grid grid-cols-1 gap-10 pt-10 md:grid-cols-[280px_1fr] md:pt-0">
           <div>
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#1c1c1c]">
               {brother.cloudinaryPublicId ? (
@@ -106,9 +107,10 @@ export default function BrotherModal({
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-white/25">
-                    Placeholder Photo
-                  </span>
+                  <UserRound
+                    className="h-1/2 w-1/2 text-gray-400"
+                    strokeWidth={1.5}
+                  />
                 </div>
               )}
             </div>
@@ -117,6 +119,7 @@ export default function BrotherModal({
                <p className="mt-3 text-center text-[0.9rem] text-white/40">
                 Past Positions: {brother.pastPositions.join(' · ')}
                 </p>
+
             )}
           </div>
 
@@ -181,11 +184,11 @@ export default function BrotherModal({
                 </p>
               </div>
               <div className="text-center">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/40">
-                  Pledge Class
+                <p className="text-xs py-2 uppercase tracking-[0.2em] text-white/40">
+                  Class
                 </p>
-                <p className="mt-1 font-['Palatino_Linotype'] text-sm text-[#c8b89a]" title={brother.pledgeClass}>
-                  {toGreekLetter(brother.pledgeClass)}
+                <p className="mt-1 text-sm text-white/85">
+                  {brother.pledgeClass}
                 </p>
               </div>
             </div>

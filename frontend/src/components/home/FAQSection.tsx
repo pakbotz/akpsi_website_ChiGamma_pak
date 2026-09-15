@@ -49,11 +49,11 @@ const FAQS = [
     ),
   },
   {
-    q: 'How many prospects are accepted each semester?',
+    q: 'How many prospects are accepted each term?',
     a: (
       <>
         There is <strong>no predetermined number of prospects</strong> accepted each
-        semester. The size of each Prospecting Process depends on the level of
+        Fall/Spring term. The size of each Prospecting Process depends on the level of
         interest and participation during recruitment. Our focus is on creating a
         meaningful experience for everyone involved rather than setting an arbitrary
         limit.
@@ -74,7 +74,7 @@ const FAQS = [
     ),
   },
   {
-    q: 'What is the time commitment once initiated?',
+    q: 'What is the time commitment during the Prospecting Process?',
     a: (
       <>
         Alpha Kappa Psi is a commitment to{' '}

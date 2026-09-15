@@ -5,16 +5,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 import { Menu } from 'lucide-react';
+import { SubOrganization } from '@/lib/types';
 import { RUSH_TERMS } from '@/lib/rushTerms';
 import FullscreenMenu from './FullscreenMenu';
 
 // ─── Main Navbar ───────────────────────────────────────────────────
-// Single navbar for the whole site. The home page ("/") and the Brothers
-// directory ("/brothers" and its sub-routes) are dark-themed (black
-// background, cream text) while every other page so far is light-themed
-// (off-white background, near-black text) — this component reads the
-// current route and switches its own colors accordingly, so there's only
-// ever one nav rendered, one "Menu" button, one place to fix.
+// Single navbar for the whole site. The home page ("/"), the Brothers
+// directory ("/brothers"), the sub-organizations pages
+// ("/sub-organizations" and its sub-routes), and the Gallery ("/gallery")
+// are dark-themed (black background, cream text) while every other page
+// so far is light-themed (off-white background, near-black text) — this
+// component reads the current route and switches its own colors
+// accordingly, so there's only ever one nav rendered, one "Menu" button,
+// one place to fix.
 //
 // Rush terms can carry their own theme (see rushTerms.ts) — themed terms
 // alternate between several dark and light color blocks down the page,
@@ -29,17 +32,32 @@ const THEME_NAV_BACKDROP: Record<string, string> = {
   bape: 'bg-black/40 backdrop-blur-md',
 };
 
-export default function Navbar() {
+export default function Navbar({
+  subOrganizations,
+}: {
+  subOrganizations: SubOrganization[];
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const isBrothersPage = pathname.startsWith('/brothers');
+  const isSubOrgsPage = pathname.startsWith('/sub-organizations');
+  const isGalleryPage = pathname.startsWith('/gallery');
+  const isCareersPage = pathname.startsWith('/careers');
+  const isAboutPage = pathname.startsWith('/about');
 
   const rushSlug = pathname.startsWith('/rush/') ? pathname.split('/')[2] : undefined;
   const activeTerm = rushSlug ? RUSH_TERMS.find((t) => t.slug === rushSlug) : undefined;
   const themeBackdrop = activeTerm?.theme ? THEME_NAV_BACKDROP[activeTerm.theme] : undefined;
   const isThemedTerm = Boolean(themeBackdrop);
 
-  const isDark = isThemedTerm || pathname === '/' || pathname === '/about' || isBrothersPage;
+  const isDark =
+    isThemedTerm ||
+    pathname === '/' ||
+    isBrothersPage ||
+    isSubOrgsPage ||
+    isGalleryPage ||
+    isCareersPage ||
+    isAboutPage;
 
   return (
     <>
@@ -75,7 +93,12 @@ export default function Navbar() {
 
       {/* Fullscreen overlay */}
       <AnimatePresence>
-        {menuOpen && <FullscreenMenu onClose={() => setMenuOpen(false)} />}
+        {menuOpen && (
+          <FullscreenMenu
+            subOrganizations={subOrganizations}
+            onClose={() => setMenuOpen(false)}
+          />
+        )}
       </AnimatePresence>
     </>
   );
