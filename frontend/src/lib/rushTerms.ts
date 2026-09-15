@@ -37,7 +37,7 @@ const DEFAULT_EVENTS: RushEvent[] = [
     name: 'Info Night',
     date: '9/28',
     description:
-      'An open house introduction to Alpha Kappa Psi — meet the brothers, learn about our mission, and get an overview of the recruitment process.',
+      'An open house introduction to Alpha Kappa Psi. Meet the brothers, learn about our mission, and get an overview of the recruitment process.',
   },
   {
     name: 'Meet the Chapter',
@@ -91,7 +91,7 @@ export const RUSH_TERMS: RushTerm[] = [
         name: 'Info Night',
         date: '3/30',
         description:
-          'An open house introduction to Alpha Kappa Psi — meet the brothers, learn about our mission, and get an overview of the recruitment process.',
+          'An open house introduction to Alpha Kappa Psi. Meet the brothers, learn about our mission, and get an overview of the recruitment process.',
       },
       {
         name: 'Meet the Chapter',

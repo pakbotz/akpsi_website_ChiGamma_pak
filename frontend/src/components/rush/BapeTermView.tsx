@@ -238,12 +238,27 @@ export default function BapeTermView({
             </span>
           </div>
 
-          <div className="relative inline-block">
+          {/* Font-size lives on the wrapper (not the h1) so the monkey can
+              position and size itself in `em`/`rem` off the same values the
+              text uses (h1's own font-size is `inherit`, its margin-top is
+              the fixed 1.25rem from `mt-5`) — that locks the image and the
+              text to one scale ratio at every viewport width, so shrinking
+              the screen scales the whole lockup as a single unit instead of
+              the two drifting apart. "Rush" and the term label are split
+              into their own lines (instead of a single tight `leading-0.85`
+              block) with an explicit em-based gap between them — that gap
+              exists specifically to give the monkey real room to sit above
+              "2026" at a larger size without touching either line, at any
+              screen width. */}
+          <div className="relative inline-block" style={{ fontSize: 'clamp(3rem, 10vw, 9rem)' }}>
             <h1
-              className={`${display.className} mt-5 uppercase leading-[0.85] tracking-tight text-white`}
-              style={{ fontSize: 'clamp(3rem, 10vw, 9rem)' }}
+              className={`${display.className} mt-5 uppercase tracking-tight text-white`}
+              style={{ fontSize: 'inherit' }}
             >
-              Rush<br />{term.label}
+              <span className="block w-fit leading-[0.85]">Rush</span>
+              <span className="block w-fit leading-[0.85]" style={{ marginTop: '1.4em' }}>
+                {term.label}
+              </span>
             </h1>
             <Image
               src="/monkey.png"
@@ -254,10 +269,10 @@ export default function BapeTermView({
               priority
               className="pointer-events-none absolute select-none"
               style={{
-                width: 'clamp(120px, 20vw, 260px)',
+                top: 'calc(1.25rem + 0.95em)',
+                left: '2.05em',
+                width: '2em',
                 height: 'auto',
-                right: '2%',
-                bottom: '48%',
               }}
             />
           </div>
