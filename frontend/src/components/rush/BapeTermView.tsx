@@ -240,25 +240,19 @@ export default function BapeTermView({
 
           {/* Font-size lives on the wrapper (not the h1) so the monkey can
               position and size itself in `em`/`rem` off the same values the
-              text uses (h1's own font-size is `inherit`, its margin-top is
-              the fixed 1.25rem from `mt-5`) — that locks the image and the
-              text to one scale ratio at every viewport width, so shrinking
-              the screen scales the whole lockup as a single unit instead of
-              the two drifting apart. "Rush" and the term label are split
-              into their own lines (instead of a single tight `leading-0.85`
-              block) with an explicit em-based gap between them — that gap
-              exists specifically to give the monkey real room to sit above
-              "2026" at a larger size without touching either line, at any
-              screen width. */}
+              text uses — that locks the image and the text to one scale
+              ratio at every viewport width, so shrinking the screen scales
+              the whole lockup as a single unit instead of the two drifting
+              apart. Lines are stacked tight (no gap) like the original
+              design; the monkey still clears "2026" because at this size
+              it's shorter than one line's own height, so it fits inside
+              "Rush"'s row without needing extra room. */}
           <div className="relative inline-block" style={{ fontSize: 'clamp(3rem, 10vw, 9rem)' }}>
             <h1
-              className={`${display.className} mt-5 uppercase tracking-tight text-white`}
+              className={`${display.className} mt-5 uppercase leading-[0.85] tracking-tight text-white`}
               style={{ fontSize: 'inherit' }}
             >
-              <span className="block w-fit leading-[0.85]">Rush</span>
-              <span className="block w-fit leading-[0.85]" style={{ marginTop: '1.4em' }}>
-                {term.label}
-              </span>
+              Rush<br />{term.label}
             </h1>
             <Image
               src="/monkey.png"
@@ -269,9 +263,9 @@ export default function BapeTermView({
               priority
               className="pointer-events-none absolute select-none"
               style={{
-                top: 'calc(1.25rem + 0.95em)',
-                left: '2.05em',
-                width: '2em',
+                top: 'calc(1.25rem - 0.01em)',
+                left: '1.81em',
+                width: '1.5em',
                 height: 'auto',
               }}
             />
@@ -317,14 +311,14 @@ export default function BapeTermView({
             <div className="mx-auto mt-5 max-w-2xl space-y-4 text-base leading-relaxed text-neutral-600">
               <p>
                 {`We're excited to introduce Rush ${term.label}: `}
-                <span className="font-semibold text-black">&quot;Apes Together Strong.&quot;</span>
-                {" It's a simple idea: on your own, you can only go so far. Together, there's no ceiling. Rush is where that starts, five events built to show you what it actually looks like when a group of people has your back."}
+                <span className="font-semibold text-black">&quot;Become a Star.&quot;</span>
+                {" It's a simple idea: no star burns as bright alone. Rush is where that starts, five events built to show you what it actually looks like when a group of people has your back."}
               </p>
               <p>
                 Alpha Kappa Psi is built on that same idea: brothers who show up for each other, a network that keeps paying off long after graduation, and a community where professional growth and real friendship push each other forward instead of competing for your time.
               </p>
               <p className="font-medium text-black">
-                You don&apos;t have to do this alone. Rush {term.label} starts now.
+                You don&apos;t have to shine alone. Rush {term.label} starts now.
               </p>
               <p className="text-sm text-neutral-400">{term.blurb}</p>
             </div>
