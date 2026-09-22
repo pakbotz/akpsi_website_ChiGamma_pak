@@ -12,6 +12,9 @@ export default function CareersRoster({
 }) {
   const [activeYear, setActiveYear] = useState(years[years.length - 1] ?? '');
   const roster = alumniByYear[activeYear] ?? [];
+  const sortedRoster = [...roster].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
   if (years.length === 0) {
     return (
@@ -74,12 +77,12 @@ export default function CareersRoster({
         {/* Roster surface */}
         <div className="rounded-b-md rounded-tr-md border-t border-white/10 bg-[#111111]">
           <ul>
-            {roster.map((alum, i) => (
+            {sortedRoster.map((alum, i) => (
               <li
                 key={`${alum.name}-${i}`}
                 className={[
                   'flex flex-col gap-1 px-6 py-5 sm:flex-row sm:items-baseline sm:justify-between',
-                  i !== roster.length - 1 ? 'border-b border-white/10' : '',
+                  i !== sortedRoster.length - 1 ? 'border-b border-white/10' : '',
                 ].join(' ')}
               >
                 <span
@@ -95,7 +98,7 @@ export default function CareersRoster({
                 </span>
               </li>
             ))}
-            {roster.length === 0 && (
+            {sortedRoster.length === 0 && (
               <li className="px-6 py-8 text-center text-sm text-white/30">
                 No entries for {activeYear} yet.
               </li>
