@@ -74,7 +74,7 @@ export default function ImageUploadCard({
 
       <CldUploadWidget
         uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
-        options={{ sources: ['local'], singleUploadAutoClose: true }}
+        options={{ sources: ['local', 'camera', 'url', 'google_drive'], singleUploadAutoClose: true }}
         onSuccess={(result) => {
           if (result.info && typeof result.info === 'object' && 'public_id' in result.info) {
             onUploaded(result.info.public_id as string);

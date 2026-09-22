@@ -46,18 +46,24 @@ export default function GalleryCarousel({ events }: { events: GalleryEventSlide[
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex gap-4 sm:gap-6">
           {events.map((event) => (
-            <div key={event.id} className="min-w-0 shrink-0 basis-[85%] sm:basis-[60%] lg:basis-[46%]">
-              <div className="relative aspect-video w-full overflow-hidden bg-[#1c1c1c]">
+            <div key={event.id} className="group min-w-0 shrink-0 basis-[85%] sm:basis-[60%] lg:basis-[46%]">
+              <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-[#e7d3ab] shadow-[0_8px_24px_-12px_rgba(122,67,21,0.35)] transition-shadow duration-500 group-hover:shadow-[0_20px_40px_-15px_rgba(122,67,21,0.45)]">
                 <CldImage
                   src={event.cloudinaryPublicId}
                   alt={event.caption || 'Chapter event photo'}
                   fill
                   crop="fill"
                   gravity="auto"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-50"
+                  style={{
+                    background: 'linear-gradient(to top, rgba(74,40,12,0.55) 0%, rgba(74,40,12,0) 45%)',
+                  }}
                 />
               </div>
-              <p className="mt-4 text-sm uppercase tracking-[0.15em] text-white/50">
+              <p className="mt-4 text-sm uppercase tracking-[0.15em] text-[#7a5c3e]">
                 {event.caption}
               </p>
             </div>
@@ -71,7 +77,7 @@ export default function GalleryCarousel({ events }: { events: GalleryEventSlide[
             onClick={scrollPrev}
             disabled={!canScrollPrev}
             aria-label="Previous"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/50 transition-colors hover:border-[#c8b89a] hover:text-[#c8b89a] disabled:opacity-30 disabled:hover:border-white/15 disabled:hover:text-white/50"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-[#c99a5b]/40 text-[#8a5a24] transition-colors hover:border-[#c2662d] hover:text-[#c2662d] disabled:opacity-30 disabled:hover:border-[#c99a5b]/40 disabled:hover:text-[#8a5a24]"
           >
             <ArrowLeft size={16} />
           </button>
@@ -79,7 +85,7 @@ export default function GalleryCarousel({ events }: { events: GalleryEventSlide[
             onClick={scrollNext}
             disabled={!canScrollNext}
             aria-label="Next"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/50 transition-colors hover:border-[#c8b89a] hover:text-[#c8b89a] disabled:opacity-30 disabled:hover:border-white/15 disabled:hover:text-white/50"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-[#c99a5b]/40 text-[#8a5a24] transition-colors hover:border-[#c2662d] hover:text-[#c2662d] disabled:opacity-30 disabled:hover:border-[#c99a5b]/40 disabled:hover:text-[#8a5a24]"
           >
             <ArrowRight size={16} />
           </button>
@@ -92,7 +98,7 @@ export default function GalleryCarousel({ events }: { events: GalleryEventSlide[
               className="h-1.5 rounded-full transition-all"
               style={{
                 width: i === selectedIndex ? 24 : 6,
-                backgroundColor: i === selectedIndex ? '#c8b89a' : '#3a3a3a',
+                backgroundColor: i === selectedIndex ? '#c2662d' : '#e2c39a',
               }}
             />
           ))}

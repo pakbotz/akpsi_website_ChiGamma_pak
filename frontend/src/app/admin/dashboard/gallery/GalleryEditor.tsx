@@ -113,7 +113,7 @@ export default function GalleryEditor({
 
         <CldUploadWidget
           uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
-          options={{ sources: ['local'], multiple: true }}
+          options={{ sources: ['local', 'camera', 'url', 'google_drive'], multiple: true }}
           onSuccess={(result) => {
             setUploading(true);
             if (result.info && typeof result.info === 'object' && 'public_id' in result.info) {
