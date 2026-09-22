@@ -155,7 +155,7 @@ export default function GalleryGrid({ images }: { images: GalleryPhoto[] }) {
   if (images.length === 0) {
     return (
       <p className="py-16 text-center text-sm text-[#7a5c3e]">
-        Photos coming soon — check back after the next chapter event.
+        Photos coming soon. Check back after the next chapter event.
       </p>
     );
   }

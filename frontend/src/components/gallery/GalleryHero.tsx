@@ -33,8 +33,8 @@ export default function GalleryHero() {
         transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         className="mt-5 max-w-lg text-base leading-relaxed text-[#8a6b48] sm:text-lg"
       >
-        The late nights, the rush events, the random Tuesday hangouts — this is what being
-        in Chi Gamma actually looks like. Every photo here is a brother, a memory, a reason
+        The late nights, the rush events, the random Tuesday hangouts. This is what being in
+        Chi Gamma actually looks like, and every photo here is a brother, a memory, a reason
         we do this.
       </motion.p>
     </div>
