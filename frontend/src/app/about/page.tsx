@@ -21,7 +21,7 @@ const GOLD = '#c8b89a';
 // Leave any blank ('') and that spot keeps showing the placeholder tile.
 const IMAGES = {
   hero: 'IMG_6619_f9fk6q',     // wide hero photo at the top
-  chapter: 'IMG_6615_jzcbpi',  // "The Chi Gamma Chapter" block
+  chapter: 'IMG_6106_yoitne',  // "The Chi Gamma Chapter" block (Unity photo)
   history: 'IMG_7335_b8t0yw',  // "Fraternity History" block
 };
 
@@ -43,21 +43,21 @@ const BADGES = [
 ];
 
 const ALUMNI = [
-  { name: 'Sam Walton', caption: 'Founder, Walmart', note: 'Built Walmart into the world\u2019s largest retailer.', photo: '' },
-  { name: 'Alexis Ohanian', caption: 'Co-Founder, Reddit', note: 'Co-founded Reddit, one of the web\u2019s largest communities.', photo: '' },
-  { name: 'Bernie Marcus', caption: 'Co-Founder, The Home Depot', note: 'Co-founded The Home Depot, the top home-improvement chain.', photo: '' },
-  { name: 'J. Willard Marriott', caption: 'Founder, Marriott', note: 'Turned a root-beer stand into a global hotel empire.', photo: '' },
-  { name: 'James Cash Penney', caption: 'Founder, J.C. Penney', note: 'Founded J.C. Penney on a golden-rule philosophy.', photo: '' },
-  { name: 'Cheryl Bachelder', caption: 'Former CEO, Popeyes', note: 'Led Popeyes through a celebrated turnaround as CEO.', photo: '' },
-  { name: 'Steve Forbes', caption: 'Editor-in-Chief, Forbes', note: 'Editor-in-chief of Forbes and two-time presidential candidate.', photo: '' },
-  { name: 'Benazir Bhutto', caption: 'Prime Minister of Pakistan', note: 'First woman to lead a modern Muslim-majority nation.', photo: '' },
+  { name: 'Steve Forbes', caption: 'Editor-in-Chief, Forbes', note: 'Editor-in-chief of Forbes and two-time presidential candidate.', photo: 'gettyimages-461057770-612x612_ic0wiz', pos: '50% 0%', zoom: 1.8, contain: false },
+  { name: 'Sam Walton', caption: 'Founder, Walmart', note: 'Built Walmart into the world\u2019s largest retailer.', photo: 'Sam-Walton_hanow8', pos: '50% 40%', zoom: 1, contain: false },
+  { name: 'Benazir Bhutto', caption: 'Prime Minister of Pakistan', note: 'First woman to lead a modern Muslim-majority nation.', photo: 'ghows-WT-a0d848fa-5304-4955-8d28-7b0d58a6d88e-22971f12_dftnkk', pos: '50% 30%', zoom: 1.08, contain: false },
+  { name: 'Alexis Ohanian', caption: 'Co-Founder, Reddit', note: 'Co-founded Reddit, one of the web\u2019s largest communities.', photo: 'Alexis_Ohanian_1-17-2012_nwoons', pos: '50% 32%', zoom: 1.65, contain: false },
+  { name: 'J. Willard Marriott', caption: 'Founder, Marriott', note: 'Turned a root-beer stand into a global hotel empire.', photo: 'j-willard-marriott-b29ffdf4-c76e-4cde-ad90-c82be1fee95-resize-750_r0jlch', pos: '50% 0%', zoom: 1, contain: true },
+  { name: 'Cheryl Bachelder', caption: 'Former CEO, Popeyes', note: 'Led Popeyes through a celebrated turnaround as CEO.', photo: 'ect_backpage18__05_iz3xut', pos: '50% 35%', zoom: 1.6, contain: false },
+  { name: 'Bernie Marcus', caption: 'Co-Founder, The Home Depot', note: 'Co-founded The Home Depot, the top home-improvement chain.', photo: '2012_fall_ferguson_banner_urax6a', pos: '50% 50%', zoom: 1, contain: false },
+  { name: 'James Cash Penney', caption: 'Founder, J.C. Penney', note: 'Founded J.C. Penney on a golden-rule philosophy.', photo: 'JCP-portrait_wzkkfx', pos: '50% 28%', zoom: 1.6, contain: false },
 ];
 
 const VALUES = [
-  { title: 'Brotherhood', body: 'Trust, respect, cooperation, companionship and aid to brothers is the expected norm.', icon: 'users', photo: 'IMG_6106_yoitne' },
+  { title: 'Brotherhood', body: 'Trust, respect, cooperation, companionship and aid to brothers is the expected norm.', icon: 'users', photo: 'IMG_6615_jzcbpi' },
   { title: 'Knowledge', body: 'Education and experience is emphasized and shared.', icon: 'book', photo: 'IMG_6619_f9fk6q' },
-  { title: 'Integrity', body: 'All actions, whether in business or in life, are guided by honesty, ethics and fairness.', icon: 'shield', photo: 'IMG_6615_jzcbpi' },
-  { title: 'Service', body: 'Sharing of time, talent and treasure with society and with our fraternity is a priority.', icon: 'heart', photo: 'IMG_7335_b8t0yw' },
+  { title: 'Integrity', body: 'All actions, whether in business or in life, are guided by honesty, ethics and fairness.', icon: 'shield', photo: 'IMG_7335_b8t0yw' },
+  { title: 'Service', body: 'Sharing of time, talent and treasure with society and with our fraternity is a priority.', icon: 'heart', photo: 'IMG_6772_abiagx' },
   { title: 'Unity', body: 'A common understanding of our vision and values that transcends chapter.', icon: 'link', photo: 'IMG_6106_yoitne' },
 ];
 
@@ -99,8 +99,27 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   return <p className="text-xs uppercase tracking-[0.2em] text-[#f0eeea]/45">{children}</p>;
 }
 
-/* --- Cloudinary image that fills its parent (parent must be relative) --- */
-function CloudImage({ publicId, alt, sizes = '100vw', priority = false }: { publicId: string; alt: string; sizes?: string; priority?: boolean }) {
+/* --- Cloudinary image that fills its parent (parent must be relative).
+   pos = object-position anchor (e.g. '50% 0%' keeps the top, crops the bottom).
+   zoom = extra magnification toward that anchor (1 = none, 1.3 = zoomed in).
+   contain = show the whole photo instead of cropping (a "zoomed out" look). --- */
+function CloudImage({
+  publicId,
+  alt,
+  sizes = '100vw',
+  priority = false,
+  pos = '50% 50%',
+  zoom = 1,
+  contain = false,
+}: {
+  publicId: string;
+  alt: string;
+  sizes?: string;
+  priority?: boolean;
+  pos?: string;
+  zoom?: number;
+  contain?: boolean;
+}) {
   return (
     <CldImage
       src={publicId}
@@ -110,7 +129,12 @@ function CloudImage({ publicId, alt, sizes = '100vw', priority = false }: { publ
       quality="auto"
       format="auto"
       priority={priority}
-      className="object-cover"
+      className={contain ? 'object-contain' : 'object-cover'}
+      style={{
+        objectPosition: pos,
+        transform: zoom !== 1 ? `scale(${zoom})` : undefined,
+        transformOrigin: pos,
+      }}
     />
   );
 }
@@ -197,7 +221,7 @@ function AlumniCard({ a, index }: { a: Alumnus; index: number }) {
         {/* FRONT — photo + name */}
         <div className="absolute inset-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]" style={faceHidden}>
           {a.photo ? (
-            <CloudImage publicId={a.photo} alt={a.name} sizes="288px" />
+            <CloudImage publicId={a.photo} alt={a.name} sizes="288px" pos={a.pos} zoom={a.zoom} contain={a.contain} />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/20">Placeholder Photo</span>
