@@ -57,7 +57,7 @@ const VALUES = [
   { title: 'Brotherhood', body: 'Trust, respect, cooperation, companionship and aid to brothers is the expected norm.', icon: 'users', photo: 'IMG_6615_jzcbpi' },
   { title: 'Knowledge', body: 'Education and experience is emphasized and shared.', icon: 'book', photo: 'IMG_6619_f9fk6q' },
   { title: 'Integrity', body: 'All actions, whether in business or in life, are guided by honesty, ethics and fairness.', icon: 'shield', photo: 'IMG_7335_b8t0yw' },
-  { title: 'Service', body: 'Sharing of time, talent and treasure with society and with our fraternity is a priority.', icon: 'heart', photo: 'IMG_7335_b8t0yw' },
+  { title: 'Service', body: 'Sharing of time, talent and treasure with society and with our fraternity is a priority.', icon: 'heart', photo: 'IMG_6772_abiagx' },
   { title: 'Unity', body: 'A common understanding of our vision and values that transcends chapter.', icon: 'link', photo: 'IMG_6106_yoitne' },
 ];
 
