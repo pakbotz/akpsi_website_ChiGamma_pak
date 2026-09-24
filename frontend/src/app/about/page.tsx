@@ -21,7 +21,7 @@ const GOLD = '#c8b89a';
 // Leave any blank ('') and that spot keeps showing the placeholder tile.
 const IMAGES = {
   hero: 'IMG_6619_f9fk6q',     // wide hero photo at the top
-  chapter: 'IMG_6615_jzcbpi',  // "The Chi Gamma Chapter" block
+  chapter: 'IMG_6106_yoitne',  // "The Chi Gamma Chapter" block (Unity photo)
   history: 'IMG_7335_b8t0yw',  // "Fraternity History" block
 };
 
