@@ -43,14 +43,14 @@ const BADGES = [
 ];
 
 const ALUMNI = [
-  { name: 'Steve Forbes', caption: 'Editor-in-Chief, Forbes', note: 'Editor-in-chief of Forbes and two-time presidential candidate.', photo: 'gettyimages-461057770-612x612_ic0wiz', pos: '50% 0%', zoom: 1.5, contain: false },
+  { name: 'Steve Forbes', caption: 'Editor-in-Chief, Forbes', note: 'Editor-in-chief of Forbes and two-time presidential candidate.', photo: 'gettyimages-461057770-612x612_ic0wiz', pos: '50% 0%', zoom: 1.65, contain: false },
   { name: 'Sam Walton', caption: 'Founder, Walmart', note: 'Built Walmart into the world\u2019s largest retailer.', photo: 'Sam-Walton_hanow8', pos: '50% 40%', zoom: 1, contain: false },
-  { name: 'Benazir Bhutto', caption: 'Prime Minister of Pakistan', note: 'First woman to lead a modern Muslim-majority nation.', photo: 'ghows-WT-a0d848fa-5304-4955-8d28-7b0d58a6d88e-22971f12_dftnkk', pos: '50% 30%', zoom: 1.2, contain: false },
-  { name: 'Alexis Ohanian', caption: 'Co-Founder, Reddit', note: 'Co-founded Reddit, one of the web\u2019s largest communities.', photo: 'Alexis_Ohanian_1-17-2012_nwoons', pos: '50% 12%', zoom: 1.38, contain: false },
+  { name: 'Benazir Bhutto', caption: 'Prime Minister of Pakistan', note: 'First woman to lead a modern Muslim-majority nation.', photo: 'ghows-WT-a0d848fa-5304-4955-8d28-7b0d58a6d88e-22971f12_dftnkk', pos: '50% 30%', zoom: 1.08, contain: false },
+  { name: 'Alexis Ohanian', caption: 'Co-Founder, Reddit', note: 'Co-founded Reddit, one of the web\u2019s largest communities.', photo: 'Alexis_Ohanian_1-17-2012_nwoons', pos: '50% 12%', zoom: 1.52, contain: false },
   { name: 'J. Willard Marriott', caption: 'Founder, Marriott', note: 'Turned a root-beer stand into a global hotel empire.', photo: 'j-willard-marriott-b29ffdf4-c76e-4cde-ad90-c82be1fee95-resize-750_r0jlch', pos: '50% 0%', zoom: 1, contain: true },
-  { name: 'Cheryl Bachelder', caption: 'Former CEO, Popeyes', note: 'Led Popeyes through a celebrated turnaround as CEO.', photo: 'ect_backpage18__05_iz3xut', pos: '50% 35%', zoom: 1.45, contain: false },
+  { name: 'Cheryl Bachelder', caption: 'Former CEO, Popeyes', note: 'Led Popeyes through a celebrated turnaround as CEO.', photo: 'ect_backpage18__05_iz3xut', pos: '50% 35%', zoom: 1.6, contain: false },
   { name: 'Bernie Marcus', caption: 'Co-Founder, The Home Depot', note: 'Co-founded The Home Depot, the top home-improvement chain.', photo: '2012_fall_ferguson_banner_urax6a', pos: '50% 50%', zoom: 1, contain: false },
-  { name: 'James Cash Penney', caption: 'Founder, J.C. Penney', note: 'Founded J.C. Penney on a golden-rule philosophy.', photo: 'JCP-portrait_wzkkfx', pos: '50% 28%', zoom: 1.45, contain: false },
+  { name: 'James Cash Penney', caption: 'Founder, J.C. Penney', note: 'Founded J.C. Penney on a golden-rule philosophy.', photo: 'JCP-portrait_wzkkfx', pos: '50% 28%', zoom: 1.6, contain: false },
 ];
 
 const VALUES = [
