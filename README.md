@@ -1,19 +1,32 @@
 # AKPsi, Chi Gamma Chapter Website
 
-## Tech Stack:
-* Frontend: Next.js, React, Tailwind CSS
-* Backend (Content management): Admin Dashboard w/ Vercel + Supabase, NO backend server
-* Database: Supabase, PostgreSQL
-* Media Storage (Cloud): Cloudinary
-* Deployment: Vercel
+## Tech stack
+
+| Layer | Tech |
+|-------|------|
+|  Frontend | Next.js, React, Tailwind CSS |
+| Backend (Content management) | Admin Dashboard w/ Vercel + Supabase, NO backend server |
+| Database | Supabase, PostgreSQL |
+| Media Storage | Cloudinary |
+| Deployment | Vercel |
 
 ## Deployment Architecture
-Vercel (Next.js Website)  
-↓
-Supabase SDK
-↓  
-Supabase Authentication (RLS), Supabase Database
-↓
-Cloudinary (Images/CDN)
 
-Developed by Psi Tech
+┌────────────────────────────────────────────────────────┐
+│               Vercel (Next.js Website)                 │
+└───────────────┬────────────────────────┬───────────────┘
+                │                        │
+        (API / Data Flow)          (Media Assets)
+                ▼                        ▼
+     ┌────────────────────┐    ┌────────────────────┐
+     │    Supabase SDK    │    │   Cloudinary CDN   │
+     └──────────┬─────────┘    └────────────────────┘
+                │
+        ┌───────┴───────┐
+        ▼               ▼
+   ┌──────────┐   ┌──────────┐
+   │ Auth RLS │   │ Database │
+   └──────────┘   └──────────┘
+
+
+Developed by Psi Tech's Jaycob Pakingan, Ethen Dhanaraj, Haatim Ali, Sara Jain, and Chintan Patwardhan
