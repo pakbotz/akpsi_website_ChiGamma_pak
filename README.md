@@ -12,6 +12,7 @@
 
 ## Deployment Architecture
 
+```text
 ┌────────────────────────────────────────────────────────┐
 │               Vercel (Next.js Website)                 │
 └───────────────┬────────────────────────┬───────────────┘
@@ -27,6 +28,6 @@
    ┌──────────┐   ┌──────────┐
    │ Auth RLS │   │ Database │
    └──────────┘   └──────────┘
-
+```
 
 Developed by Psi Tech's Jaycob Pakingan, Ethen Dhanaraj, Haatim Ali, Sara Jain, and Chintan Patwardhan
